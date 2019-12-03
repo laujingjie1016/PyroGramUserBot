@@ -15,9 +15,20 @@ class Config(object):
     MAX_MESSAGE_LENGTH = 4096
     # specify command handler that should be used for the plugins
     # this should be a valid "regex" pattern
-    COMMAND_HAND_LER = os.environ.get("COMMAND_HAND_LER", "\.")
+    COMMAND_HAND_LER = os.environ.get("COMMAND_HAND_LER", ".")
     # This is required for the plugins involving the file system.
     TMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./DOWNLOADS/")
+    # get a Heroku API key from http://dashboard.heroku.com/account
+    HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
+    # set this to your fork on GitHub (if you want)
+    OFFICIAL_UPSTREAM_REPO = os.environ.get("OFFICIAL_UPSTREAM_REPO", "https://github.com/SpEcHiDe/PyroGramUserBot")
+    # For Databases
+    # can be None in which case plugins requiring
+    # DataBase would not work
+    DB_URI = os.environ.get("DATABASE_URL", None)
+    # gDrive variables
+    G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID", None)
+    G_DRIVE_CLIENT_SECRET = os.environ.get("G_DRIVE_CLIENT_SECRET", None)
 
 
 class Production(Config):

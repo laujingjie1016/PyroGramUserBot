@@ -32,7 +32,7 @@ async def eval(client, message):
     stdout, stderr, exc = None, None, None
 
     try:
-        await aexec(cmd, message)
+        await aexec(cmd, client, message)
     except Exception:
         exc = traceback.format_exc()
 
@@ -51,7 +51,7 @@ async def eval(client, message):
     else:
         evaluation = "Success"
 
-    final_output = "**EVAL**: `{}` \n\n **OUTPUT**: \n`{}` \n".format(cmd, evaluation)
+    final_output = "**EVAL**: ```{}```\n\n**OUTPUT**:\n```{}``` \n".format(cmd, evaluation.strip())
 
     if len(final_output) > MAX_MESSAGE_LENGTH:
         with open("eval.text", "w+", encoding="utf8") as out_file:
@@ -69,9 +69,9 @@ async def eval(client, message):
         await message.edit(final_output)
 
 
-async def aexec(code, message):
+async def aexec(code, client, message):
     exec(
-        f'async def __aexec(message): ' +
+        f'async def __aexec(client, message): ' +
         ''.join(f'\n {l}' for l in code.split('\n'))
     )
-    return await locals()['__aexec'](message)
+    return await locals()['__aexec'](client, message)
