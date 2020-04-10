@@ -36,7 +36,6 @@ async def name(client, message):
     if  "\\n" in names:
         first_name, last_name = names.split("\\n", 1)
     try:
-        await client.send(UpdateProfilePhoto())
         await client.send(functions.account.UpdateProfile(first_name=name_first, last_name=name_last))
         await message.edit("My name was changed successfully")
     except Exception as e:  
