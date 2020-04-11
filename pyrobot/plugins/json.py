@@ -5,7 +5,7 @@ from pyrogram import Client, Filters
 
 import os
 
-from pyrobot import MAX_MESSAGE_LENGTH, COMMAND_HAND_LER
+from pyrobot import COMMAND_HAND_LER
 
 
 @Client.on_message(Filters.command("json", COMMAND_HAND_LER)  & Filters.me)

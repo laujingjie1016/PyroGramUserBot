@@ -8,9 +8,7 @@ from pyrogram.client.handlers.handler import Handler
 
 
 from pyrobot import (
-    MAX_MESSAGE_LENGTH,
-    COMMAND_HAND_LER,
-    LOGGER
+    COMMAND_HAND_LER, LOGGER
 )
 
 @Client.on_message(Filters.command("load", COMMAND_HAND_LER)  & Filters.me)

@@ -2,7 +2,7 @@ import os
 import time
 
 import pyrogram
-from pyrogram import Client, Filters
+from pyrogram import Filters
 from pyrogram.api import functions
 
 from pyrobot import app, cmd

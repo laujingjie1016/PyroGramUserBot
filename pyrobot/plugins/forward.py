@@ -1,8 +1,6 @@
 import os
 import time
-
-import pyrogram
-from pyrogram import Client, Filters
+from pyrogram import Filters
 
 from pyrobot import app, cmd
 

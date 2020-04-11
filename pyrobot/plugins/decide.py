@@ -1,8 +1,5 @@
-from datetime import datetime
-
-import pyrogram
 import requests
-from pyrogram import Client, Filters
+from pyrogram import Filters
 
 from pyrobot import app, cmd
 

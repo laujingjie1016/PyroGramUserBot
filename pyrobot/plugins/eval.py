@@ -5,9 +5,6 @@ Syntax: .eval PythonCode"""
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 from pyrogram import Client, Filters
-
-import asyncio
-import inspect
 import io
 import os
 import sys
