@@ -1,9 +1,5 @@
 """Google Drive Plugins
 Syntax: .gdrive"""
-
-import asyncio
-import io
-import json
 import math
 import os
 import time
@@ -11,12 +7,7 @@ from mimetypes import guess_type
 
 
 from pyrobot import (
-    COMMAND_HAND_LER,
-    DB_URI,
-    G_DRIVE_CLIENT_ID,
-    G_DRIVE_CLIENT_SECRET,
-    MAX_MESSAGE_LENGTH,
-    TMP_DOWNLOAD_DIRECTORY
+    COMMAND_HAND_LER, DB_URI, G_DRIVE_CLIENT_ID, G_DRIVE_CLIENT_SECRET, TMP_DOWNLOAD_DIRECTORY
 )
 from pyrogram import Client, Filters
 

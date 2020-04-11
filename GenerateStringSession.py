@@ -10,7 +10,6 @@ logger = logging.getLogger(__name__)
 
 
 import asyncio
-import os
 
 try:
     from pyrobot import APP_ID, API_HASH
