@@ -17,7 +17,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@Client.on_message(Filters.command(r"pbio", ".")  & Filters.me)
+@Client.on_message(Filters.command("pbio", COMMAND_HAND_LER)  & Filters.me)
 async def test(client, message):
     bio = message.command[1]
     try:
@@ -27,7 +27,7 @@ async def test(client, message):
         await message.edit(str(e))
 
 
-@Client.on_message(Filters.command(r"pname", ".")  & Filters.me)
+@Client.on_message(Filters.command("pname", COMMAND_HAND_LER)  & Filters.me)
 async def name(client, message):
     names = message.command[1]
     print(message)
@@ -42,7 +42,7 @@ async def name(client, message):
         await message.edit(str(e))
 
 
-@Client.on_message(Filters.command(r"ppic", ".")  & Filters.me)
+@Client.on_message(Filters.command("ppic", COMMAND_HAND_LER)  & Filters.me)
 async def profile_pic(client, message):
     print(message)
     reply_message = message.reply_to_message.message_id
@@ -75,7 +75,7 @@ async def profile_pic(client, message):
     except Exception as e:  
         logger.warn(str(e))  
 
-@Client.on_message(Filters.command(r"profilephoto", ".")  & Filters.me)
+@Client.on_message(Filters.command("profilephoto", COMMAND_HAND_LER)  & Filters.me)
 async def _(client, message):
     """getting user profile photo last changed time"""
     p_number = message.command[1]
