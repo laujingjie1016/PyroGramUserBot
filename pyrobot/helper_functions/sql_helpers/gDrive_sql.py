@@ -1,7 +1,7 @@
 import pickle
 import threading
 
-from sqlalchemy import Column, Integer, String, LargeBinary
+from sqlalchemy import Column, Integer, LargeBinary
 
 from pyrobot.helper_functions.sql_helpers import BASE, SESSION
 

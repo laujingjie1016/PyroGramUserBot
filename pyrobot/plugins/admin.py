@@ -1,30 +1,14 @@
 
 import asyncio
 import logging
-import math
 import os
-import time
-from asyncio import sleep
-from datetime import datetime
-from os import remove
 
 import pyrogram
-from pyrogram import ChatMember, Client, Filters, Message
+from pyrogram import Client, Filters
 from pyrogram.api import functions, types
-from pyrogram.api.functions.channels import (EditAdmin, EditBanned,
-                                             EditCreator, EditPhoto,
-                                             TogglePreHistoryHidden)
-from pyrogram.api.functions.messages import EditChatAdmin, EditChatPhoto
-from pyrogram.api.types import (ChannelParticipantAdmin,
-                                ChannelParticipantCreator, ChatAdminRights,
-                                ChatBannedRights, ChatParticipant,
-                                ChatParticipantAdmin, InputChannelEmpty,
-                                InputChannelFromMessage, InputPeerChat,
-                                UpdateChannelPinnedMessage,
-                                UpdateChatPinnedMessage)
 from pyrogram.errors import *
 
-from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
+from pyrobot import TMP_DOWNLOAD_DIRECTORY
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

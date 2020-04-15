@@ -1,7 +1,6 @@
-import pyrogram
 import requests
 from bs4 import BeautifulSoup
-from pyrogram import Client, Filters
+from pyrogram import Filters
 
 from pyrobot import app, cmd
 

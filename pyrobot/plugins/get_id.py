@@ -1,5 +1,4 @@
-import pyrogram
-from pyrogram import Filters, Client
+from pyrogram import Filters
 from pyrobot import app, cmd
 
 @app.on_message(Filters.command(["get_id"], cmd) & Filters.me)
