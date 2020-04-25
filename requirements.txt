@@ -15,3 +15,5 @@ tgcrypto
 youtube-dl
 aria2p
 asyncio
+wikipedia
+youtube_dl
