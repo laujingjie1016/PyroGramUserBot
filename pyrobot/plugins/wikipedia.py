@@ -29,9 +29,5 @@ async def ytdl_(client: Client, message):
         text="WikiPedia **Search**: {} \n\n **Result**: \n\n{}".format(input_str, result),
         disable_web_page_preview=True
     )
-<<<<<<< HEAD
     await x.delete()
     # await message.edit_text("WikiPedia **Search**: {} \n\n **Result**: \n\n{}".format(input_str, result))
-=======
-    await x.delete()
->>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
