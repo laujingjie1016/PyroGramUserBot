@@ -8,6 +8,10 @@ import zipfile
 
 from pyrogram import Client, Filters
 from pyrogram.api import functions, types
+<<<<<<< HEAD
+=======
+from pyrogram.api.types import DocumentAttributeVideo
+>>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
 
 from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
 from pyrobot.helper_functions.display_progress_dl_up import \

@@ -5,9 +5,6 @@ Syntax: .eval PythonCode"""
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 from pyrogram import Client, Filters
-
-import asyncio
-import inspect
 import io
 import os
 import sys
@@ -16,7 +13,7 @@ import traceback
 from pyrobot import MAX_MESSAGE_LENGTH, COMMAND_HAND_LER
 
 
-@Client.on_message(Filters.command("eval", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("eval", COMMAND_HAND_LER)  & Filters.me & ~Filters.via_bot)
 async def eval(client, message):
     await message.edit("Processing ...")
     cmd = message.text.split(" ", maxsplit=1)[1]

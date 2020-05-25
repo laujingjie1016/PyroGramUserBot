@@ -7,11 +7,17 @@ import os
 from datetime import datetime
 
 from pyrogram import Client, Filters
+<<<<<<< HEAD
 from pyrogram.api import functions, types
 from pyrogram.api.functions.account import UpdateProfile
 from pyrogram.api.functions.photos import UpdateProfilePhoto
 
 from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
+=======
+from pyrogram.api import functions
+
+from pyrobot import TMP_DOWNLOAD_DIRECTORY
+>>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -27,7 +33,11 @@ async def test(client, message):
         await message.edit(str(e))
 
 
+<<<<<<< HEAD
 @Client.on_message(Filters.command(r"pname", ".")  & Filters.me)
+=======
+@Client.on_message(Filters.command("pname", COMMAND_HAND_LER)  & Filters.me)
+>>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
 async def name(client, message):
     names = message.command[1]
     print(message)
@@ -42,7 +52,11 @@ async def name(client, message):
         await message.edit(str(e))
 
 
+<<<<<<< HEAD
 @Client.on_message(Filters.command(r"ppic", ".")  & Filters.me)
+=======
+@Client.on_message(Filters.command("ppic", COMMAND_HAND_LER)  & Filters.me)
+>>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
 async def profile_pic(client, message):
     print(message)
     reply_message = message.reply_to_message.message_id
@@ -75,7 +89,11 @@ async def profile_pic(client, message):
     except Exception as e:  
         logger.warn(str(e))  
 
+<<<<<<< HEAD
 @Client.on_message(Filters.command(r"profilephoto", ".")  & Filters.me)
+=======
+@Client.on_message(Filters.command("profilephoto", COMMAND_HAND_LER)  & Filters.me)
+>>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
 async def _(client, message):
     """getting user profile photo last changed time"""
     p_number = message.command[1]

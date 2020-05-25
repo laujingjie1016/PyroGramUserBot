@@ -7,7 +7,7 @@ import os
 import time
 from datetime import datetime
 
-from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
+from pyrobot import COMMAND_HAND_LER
 from pyrobot.helper_functions.display_progress_dl_up import progress_for_pyrogram
 from pyrobot.helper_functions.check_if_thumb_exists import is_thumb_image_exists
 

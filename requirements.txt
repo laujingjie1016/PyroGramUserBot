@@ -15,6 +15,11 @@ tgcrypto
 youtube-dl
 aria2p
 asyncio
+<<<<<<< HEAD
 barcode
 requests
 beautifulsoup4
+=======
+wikipedia
+youtube_dl
+>>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
