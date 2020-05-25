@@ -1,18 +1,24 @@
 """Download Telegram Media
 Syntax: .download"""
 
-from pyrogram import Client, Filters
-
 import asyncio
+import logging
 import math
 import os
 import time
 from datetime import datetime
+
+from pyrogram import Client, Filters
 from pySmartDL import SmartDL
 
 from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
-from pyrobot.helper_functions.display_progress_dl_up import progress_for_pyrogram, humanbytes
+from pyrobot.helper_functions.display_progress_dl_up import (
+    humanbytes, progress_for_pyrogram)
 
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+logger = logging.getLogger(__name__)
 
 @Client.on_message(Filters.command("download", COMMAND_HAND_LER)  & Filters.me)
 async def down_load_media(client, message):

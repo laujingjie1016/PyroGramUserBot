@@ -3,7 +3,8 @@
 # (c) Shrimadhav U K
 
 import os
-
+from pyrogram import Client
+import pyrogram
 # the secret configuration specific things
 if bool(os.environ.get("ENV", False)):
     from pyrobot.sample_config import Config
@@ -11,7 +12,7 @@ else:
     from pyrobot.sample_config import Development as Config
 
 
-# TODO: is there a better way?
+# TODO: is there a better way
 APP_ID = Config.APP_ID
 API_HASH = Config.API_HASH
 HU_STRING_SESSION = Config.HU_STRING_SESSION
@@ -23,3 +24,6 @@ OFFICIAL_UPSTREAM_REPO = Config.OFFICIAL_UPSTREAM_REPO
 DB_URI = Config.DB_URI
 G_DRIVE_CLIENT_ID = Config.G_DRIVE_CLIENT_ID
 G_DRIVE_CLIENT_SECRET = Config.G_DRIVE_CLIENT_SECRET
+LOGGER = Config.LOGGER
+LOGGER_GROUP = Config.LOGGER_GROUP
+PRIVATE_CHANNEL_BOT_API_ID = Config.PRIVATE_CHANNEL_BOT_API_ID
