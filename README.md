@@ -56,4 +56,4 @@ class Development(Config):
 
 * [Dan Tès](https://telegram.dog/haskell) for his [Pyrogram Library](https://github.com/pyrogram/pyrogram)
 * [Colin Shark](https://telegram.dog/ColinShark) for his [PyroBot](https://git.colinshark.de/PyroBot/PyroBot)
-* [![CopyLeft](https://telegra.ph/file/b514ed14d994557a724cb.jpg)](https://telegra.ph/file/fab1017e21c42a5c1e613.mp4 "CopyLeft Credit Video")
+<!-- * [![CopyLeft](https://telegra.ph/file/b514ed14d994557a724cb.jpg)](https://telegra.ph/file/fab1017e21c42a5c1e613.mp4 "CopyLeft Credit Video") -->
