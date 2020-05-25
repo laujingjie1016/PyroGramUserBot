@@ -1,10 +1,10 @@
 import requests
-from pyrogram import Filters
+from pyrogram import Filters,Client
 
-from pyrobot import app, cmd
+from pyrobot import COMMAND_HAND_LER
 
 
-@app.on_message(Filters.command(["decide"], cmd) & Filters.me)
+@Client.on_message(Filters.command(["decide"], COMMAND_HAND_LER) & Filters.me)
 async def de_cide(client, message):
       message_id = message.message_id
       if message.reply_to_message:

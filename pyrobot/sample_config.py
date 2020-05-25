@@ -27,6 +27,7 @@ class Config(object):
     # can be None in which case plugins requiring
     # DataBase would not work
     DB_URI = os.environ.get("DATABASE_URL", None)
+    MONGO_URI = os.environ.get("MONGO_URI",None)
 
     LOGGER_GROUP = int(os.environ.get("LOGGER_GROUP", "-1001123894584"))
     # gDrive variables

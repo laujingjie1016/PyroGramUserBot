@@ -1,6 +1,13 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# (c) Shrimadhav U K
+# #!/usr/bin/env python3
+# # -*- coding: utf-8 -*-
+
+
+# import logging
+# from pymongo import MongoClient
+# from pyrobot.sample_config import Config
+
+# cli = MongoClient(Config.MONGO_URI)
+
 
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base

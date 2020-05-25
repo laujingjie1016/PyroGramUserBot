@@ -1,11 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
-from pyrogram import Filters
+from pyrogram import Filters,Client
 
-from pyrobot import app, cmd
+from pyrobot import COMMAND_HAND_LER
 
 
-@app.on_message(Filters.command(["filext"], cmd) & Filters.me)
+@Client.on_message(Filters.command(["filext"], COMMAND_HAND_LER) & Filters.me)
 async def fil_ext(client, message):
       await message.edit("Processing ...")
       sample_url = "https://www.fileext.com/file-extension/{}.html"

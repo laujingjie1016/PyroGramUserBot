@@ -1,41 +1,6 @@
 
 import asyncio
 import logging
-<<<<<<< HEAD
-import math
-import os
-from asyncio import sleep
-from datetime import datetime
-from os import remove
-from time import sleep, time
-
-import pyrogram
-from pyrogram import ChatMember, Client, Filters, Message
-from pyrogram.api import functions, types
-from pyrogram.api.functions.channels import (EditAdmin, EditBanned,
-                                             EditCreator, EditPhoto,
-                                             TogglePreHistoryHidden)
-from pyrogram.api.functions.messages import EditChatAdmin, EditChatPhoto
-from pyrogram.api.types import (ChannelParticipantAdmin,
-                                ChannelParticipantCreator, ChatAdminRights,
-                                ChatBannedRights, ChatParticipant,
-                                ChatParticipantAdmin, InputChannelEmpty,
-                                InputChannelFromMessage, InputPeerChat,
-                                UpdateChannelPinnedMessage,
-                                UpdateChatPinnedMessage)
-from pyrogram.errors import *
-
-from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
-
-from ..helper_functions.invervalhelper import IntervalHelper
-from ..helper_functions.log_message import LogMessage
-
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-
-logger = logging.getLogger(__name__)
-
-=======
 import os
 
 import pyrogram
@@ -43,60 +8,15 @@ from pyrogram import Client, Filters
 from pyrogram.api import functions, types
 from pyrogram.errors import *
 
-from pyrobot import TMP_DOWNLOAD_DIRECTORY
+from pyrobot import TMP_DOWNLOAD_DIRECTORY,COMMAND_HAND_LER
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
->>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
 admin = 'administrator'
 creator = 'creator'
 ranks = [admin, creator]
 
-<<<<<<< HEAD
-BANNED = "{0.reply_to_message.from_user.first_name} has been banned."
-BANNED_TIME = (
-    "{0.reply_to_message.from_user.first_name} has been banned for {1}.")
-BANNED_LOG = (
-    "[{0.reply_to_message.from_user.first_name}](tg://user?id={0.reply_to_message.from_user.id}) "
-    "has been banned from \"[{0.chat.title}](t.me/c/{1}/{0.message_id})\".")
-
-UNBANNED = "{0.message.reply_to_message.from_user.first_name} has been unbanned"
-UNBANNED_LOG = (
-    "[{0.reply_to_message.from_user.first_name}](tg://user?id="
-    "{0.reply_to_message.from_user.id}) has been unbanned in \"["
-    "{0.chat.title}](t.me/c/{1}/{0.message_id})\".")
-
-MUTED = "{0.reply_to_message.from_user.first_name} has been muted."
-MUTED_TIME = "{0.reply_to_message.from_user.first_name} has been muted for {1}."
-MUTED_LOG = (
-    "[{0.reply_to_message.from_user.first_name}](tg://user?id={0.reply_to_message.from_user.id}) "
-    "has been muted in \"[{0.chat.title}](t.me/c/{1}/{0.message_id})\".")
-
-UNMUTED = "{0.reply_to_message.from_user.first_name} has been unmuted."
-UNMUTED_LOG = (
-    "[{0.reply_to_message.from_user.first_name}](tg://user?id={0.reply_to_message.from_user.id}) "
-    "has been unmuted in \"[{0.chat.title}](t.me/c/{1}/{0.message_id})\".")
-
-KICKED = "{0.reply_to_message.from_user.first_name} has been kicked."
-KICKED_LOG = (
-    "[{0.reply_to_message.from_user.first_name}](tg://user?id={0.reply_to_message.from_user.id}) "
-    "has been kicked from \"[{0.chat.title}](t.me/c/{1}/{0.message_id})\".")
-
-def Timer(message: Message):
-    if len(message.command) > 1:
-        secs = IntervalHelper(message.command[1])
-        return int(str(time()).split(".")[0]) + secs.to_secs()[0]
-    else:
-        return 0
-
-
-def TimerString(message: Message):
-    secs = IntervalHelper(message.command[1])
-    return f"{secs.to_secs()[1]} {secs.to_secs()[2]}"
-
-=======
->>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
 async def ReplyCheck(message):
     if not message.reply_to_message:
         await message.edit(f"`{message.command[0]}` needs to be a reply.")
@@ -131,11 +51,7 @@ async def RestrictFailed(message):
     await message.edit(f"I can't {message.command[0]} this user.")
 
 
-<<<<<<< HEAD
 @Client.on_message(Filters.command("setgic", COMMAND_HAND_LER)  & Filters.me)
-=======
-@Client.on_message(Filters.command(r"setgic", ".")  & Filters.me)
->>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
 async def set_gic(client: Client, message):
     peer = await client.resolve_peer(message.chat.id)
     if not message.text.isalpha() and message.text not in ("/", "!"):
@@ -174,14 +90,8 @@ async def set_gic(client: Client, message):
 
 
 
-<<<<<<< HEAD
 @Client.on_message(Filters.command("ban", COMMAND_HAND_LER)  & Filters.me)
 async def bann(client: Client, message):
-=======
-@Client.on_message(Filters.command(r"ban", ".")  & Filters.me)
-async def bann(client: Client, message):
-    
->>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
     SELF = await client.get_chat_member(chat_id=message.chat.id,user_id=message.from_user.id)
     if SELF.status in ranks:
         if await ReplyCheck(message) is True:
@@ -199,17 +109,10 @@ async def bann(client: Client, message):
                     message_ids=message.reply_to_message.message_id
                 )
             except UserAdminInvalid:
-<<<<<<< HEAD
                 RestrictFailed(message)
 
 
 @Client.on_message(Filters.command("unban", COMMAND_HAND_LER)  & Filters.me)
-=======
-                pass
-
-
-@Client.on_message(Filters.command(r"unban", ".")  & Filters.me)
->>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
 async def unbann(client: Client, message):
     print(message)
     SELF = await client.get_chat_member(chat_id=message.chat.id,user_id=message.from_user.id)
@@ -224,20 +127,11 @@ async def unbann(client: Client, message):
                 )
                 await message.edit("[{}](tg://user?id={}) unbanned!".format(name,user_id))
             except UserAdminInvalid:
-<<<<<<< HEAD
                 RestrictFailed(message)
 
 
 
 @Client.on_message(Filters.command("promote", COMMAND_HAND_LER)  & Filters.me)
-=======
-                pass
-        # else:
-
-
-
-@Client.on_message(Filters.command(r"promote", ".")  & Filters.me)
->>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
 async def promot(client: Client, message):
     SELF = await client.get_chat_member(chat_id=message.chat.id,user_id=message.from_user.id)
     if await ReplyCheck(message) is True:
@@ -257,11 +151,7 @@ async def promot(client: Client, message):
             except PermissionError:
                 await RestrictFailed(message)
 
-<<<<<<< HEAD
 @Client.on_message(Filters.command("demote", COMMAND_HAND_LER)  & Filters.me)
-=======
-@Client.on_message(Filters.command(r"demote", ".")  & Filters.me)
->>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
 async def demot(client: Client, message):
     SELF = await client.get_chat_member(chat_id=message.chat.id,user_id=message.from_user.id)
     if await ReplyCheck(message) is True:
@@ -281,25 +171,12 @@ async def demot(client: Client, message):
             except PermissionError:
                 await RestrictFailed(message)
 
-<<<<<<< HEAD
 @Client.on_message(Filters.command('botlist', COMMAND_HAND_LER) & Filters.me )
 async def bot_list(client: Client, message):
     try:
         bots = "\n"
         async for member in client.iter_chat_members(message.chat.id,filter="bots"):
             bots += "🤖 [{}](tg://user?id={})\n".format(member.user.first_name,member.user.id)
-=======
-@Client.on_message(Filters.me & Filters.command(['botlist'], ['.']))
-async def bot_list(client: Client, message):
-    try:
-        x =await client.get_chat_members(message.chat.id, filter="bots")
-        bots = "\n"
-        for a in range(len(x)):
-            if x[a].user.is_bot:
-                name = x[a].user.first_name
-                bot_id = x[a].user.id
-                bots += "🤖 [{}](tg://user?id={})\n".format(name,bot_id)
->>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
         await message.edit("Botlist in {}\n{}".format(message.chat.title,bots))
     except MessageTooLong:
         await message.edit(
@@ -317,7 +194,6 @@ async def bot_list(client: Client, message):
         os.remove("botlist.txt")
 
 
-<<<<<<< HEAD
 @Client.on_message(Filters.command('adminlist', COMMAND_HAND_LER) & Filters.me )
 async def admin_list(client: Client, message):
     try:
@@ -373,19 +249,6 @@ async def ghost_list(client: Client, message):
                 deleted.append("👻 [{}](tg://user?id={})\n".format(member.user.first_name,member.user.id))
         print(len(deleted))
         await message.edit("{} Deleted Accounts Detected in {}".format(len(deleted),message.chat.title))
-=======
-@Client.on_message(Filters.me & Filters.command(['ghostlist'], ['.']))
-async def ghost_list(client: Client, message):
-    try:
-        x =await client.get_chat_members(message.chat.id)
-        deleted = "\n"
-        for a in range(len(x)):
-            if x[a].user.is_deleted:
-                name = x[a].user.status
-                deleted_id = x[a].user.id
-                deleted += "👻 [{}](tg://user?id={})\n".format(name,deleted_id)
-        await message.edit("Deleted Accounts in {}:\n{}".format(message.chat.title,deleted))
->>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205
     except MessageTooLong:
         await message.edit(
             "This group is filled with deleted account as hell. Uploading bots list as file."
@@ -403,7 +266,6 @@ async def ghost_list(client: Client, message):
         
 
 
-<<<<<<< HEAD
 @Client.on_message(Filters.command("mute", COMMAND_HAND_LER)  & Filters.me)
 async def mutee(client: Client, message):
     print(message)
@@ -509,500 +371,3 @@ async def undlt(client: Client, message):
         deleted_msg += "👉 {}\n".format(msg.text)
     await message.edit(deleted_msg)
 
-=======
-
-
-            
-# @borg.on(events.NewMessage(outgoing=True, pattern="^.unban(?: |$)(.*)")) # pylint:disable=E0602
-# async def unban(eventUnban):
-#     if not eventUnban.text[0].isalpha() and eventUnban.text[0] \
-#             not in ("/", "#", "@", "!"):
-#         chat = await eventUnban.get_chat()
-#         admin = chat.admin_rights
-#         creator = chat.creator
-#         if not admin and not creator:
-#             await eventUnban.edit("`I am not an admin!`")
-#             return
-#         await eventUnban.edit("Unbanning!`")
-#         user = await get_user_from_event(eventUnban)
-#         if user:
-#             pass
-#         else:
-#             return
-#         try:
-#             await eventUnban.client(EditBannedRequest(
-#                 eventUnban.chat_id,
-#                 user.id,
-#                 UNBAN_RIGHTS
-#             ))
-#             await eventUnban.edit("```Unbanned Successfully```")
-#             if ENABLE_LOG:
-#                 await eventUnban.client.send_message(
-#                     LOGGING_CHATID,
-#                     "#UNBAN\n"
-#                     f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-#                     f"CHAT: {eventUnban.chat.title}(`{eventUnban.chat_id}`)"
-#                 )
-#         except UserIdInvalidError:
-#             await eventUnban.edit("`Uh oh my unban logic broke!`")
-
- 
-# @borg.on(events.NewMessage(outgoing=True, pattern="^.mute(?: |$)(.*)")) # pylint:disable=E0602
-# async def mute(eventMute):
-#     if not eventMute.text[0].isalpha() and eventMute.text[0] not in ("/", "#", "@", "!"):
-#         try:
-#             from sql_helpers.spam_mute_sql import mute
-#         except AttributeError:
-#             await eventMute.edit("`Running on Non-SQL mode!`")
-#             return
-#         chat = await eventMute.get_chat()
-#         admin = chat.admin_rights
-#         creator = chat.creator
-#         if not admin and not creator:
-#             await eventMute.edit("`I am not an admin!`")
-#             return
-
-#         user = await get_user_from_event(eventMute)
-#         if user:
-#             pass
-#         else:
-#             return
-#         self_user = await eventMute.client.get_me()
-#         if user.id == self_user.id:
-#             await eventMute.edit("`Hands too short, can't duct tape myself...\n(ヘ･_･)ヘ┳━┳`")
-#             return
-#         await eventMute.edit("`Gets a tape!`")
-#         if mute(eventMute.chat_id, user.id) is False:
-#             return await eventMute.edit('`Error! User probably already muted.`')
-#         else:
-#             try:
-#                 await eventMute.client(
-#                     EditBannedRequest(
-#                         eventMute.chat_id,
-#                         user.id,
-#                         MUTE_RIGHTS
-#                     )
-#                 )
-#                 await eventMute.edit("`Safely taped!`")
-#                 if ENABLE_LOG:
-#                     await eventMute.client.send_message(
-#                         LOGGING_CHATID,
-#                         "#MUTE\n"
-#                         f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-#                         f"CHAT: {eventMute.chat.title}(`{eventMute.chat_id}`)"
-#                     )
-#             except UserIdInvalidError:
-#                 return await eventMute.edit("`Uh oh my mute logic broke!`")
-
-
-# @borg.on(events.NewMessage(outgoing=True, pattern="^.unmute(?: |$)(.*)")) # pylint:disable=E0602
-# async def unmute(eventUnMute):
-#     if not eventUnMute.text[0].isalpha() and eventUnMute.text[0] \
-#             not in ("/", "#", "@", "!"):
-#         chat = await eventUnMute.get_chat()
-#         admin = chat.admin_rights
-#         creator = chat.creator
-#         if not admin and not creator:
-#             await eventUnMute.edit("`I am not an admin!`")
-#             return
-#         try:
-#             from sql_helpers.spam_mute_sql import unmute
-#         except AttributeError:
-#             await eventUnMute.edit("`Running on Non-SQL mode!`")
-#             return
-#         await eventUnMute.edit('```Unmuting...```')
-#         user = await get_user_from_event(eventUnMute)
-#         if user:
-#             pass
-#         else:
-#             return
-#         if unmute(eventUnMute.chat_id, user.id) is False:
-#             return await eventUnMute.edit("`Error! User probably already unmuted.`")
-#         else:
-
-#             try:
-#                 await eventUnMute.client(
-#                     EditBannedRequest(
-#                         eventUnMute.chat_id,
-#                         user.id,
-#                         UNBAN_RIGHTS
-#                     )
-#                 )
-#                 await eventUnMute.edit("```Unmuted Successfully```")
-#             except UserIdInvalidError:
-#                 await eventUnMute.edit("`Uh oh my unmute logic broke!`")
-#                 return
-
-#             if ENABLE_LOG:
-#                 await eventUnMute.client.send_message(
-#                     LOGGING_CHATID,
-#                     "#UNMUTE\n"
-#                     f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-#                     f"CHAT: {eventUnMute.chat.title}(`{eventUnMute.chat_id}`)"
-#                 )
-
-
-# @borg.on(events.NewMessage(incoming=True)) # pylint:disable=E0602
-# async def muter(mutedMessage): 
-#     try:
-#         from sql_helpers.spam_mute_sql import is_muted
-#         from sql_helpers.gmute_sql import is_gmuted
-#     except AttributeError:
-#         return
-#     muted = is_muted(mutedMessage.chat_id)
-#     gmuted = is_gmuted(mutedMessage.sender_id)
-#     rights = ChatBannedRights(
-#         until_date=None,
-#         send_messages=True,
-#         send_media=True,
-#         send_stickers=True,
-#         send_gifs=True,
-#         send_games=True,
-#         send_inline=True,
-#         embed_links=True,
-#     )
-#     if muted:
-#         for i in muted:
-#             if str(i.sender) == str(mutedMessage.sender_id):
-#                 await mutedMessage.delete()
-#                 await mutedMessage.client(EditBannedRequest(
-#                     mutedMessage.chat_id,
-#                     mutedMessage.sender_id,
-#                     rights
-#                 ))
-#     for i in gmuted:
-#         if i.sender == str(mutedMessage.sender_id):
-#             await mutedMessage.delete()
-
-
-# @borg.on(events.NewMessage(outgoing=True, pattern="^.gmute(?: |$)(.*)")) # pylint:disable=E0602
-# async def gmute(eventGmute):
-#     if not eventGmute.text[0].isalpha() and eventGmute.text[0] not in ("/", "#", "@", "!"):
-#         chat = await eventGmute.get_chat()
-#         admin = chat.admin_rights
-#         creator = chat.creator
-#         if not admin and not creator:
-#             await eventGmute.edit("`I am not an admin!`")
-#             return
-#         try:
-#             from sql_helpers.gmute_sql import gmute
-#         except AttributeError:
-#             await eventGmute.edit("`Running on Non-SQL mode!`")
-#             return
-
-#         user = await get_user_from_event(eventGmute)
-#         if user:
-#             pass
-#         else:
-#             return
-#         await eventGmute.edit("`Grabs a huge, sticky duct tape!`")
-#         if gmute(user.id) is False:
-#             await eventGmute.edit('`Error! User probably already gmuted.\nRe-rolls the tape.`')
-#         else:
-#             await eventGmute.edit("`Haha Yash! Globally taped!`")
-
-#             if ENABLE_LOG:
-#                 await eventGmute.client.send_message(
-#                     LOGGING_CHATID,
-#                     "#GMUTE\n"
-#                     f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-#                     f"CHAT: {eventGmute.chat.title}(`{eventGmute.chat_id}`)"
-#                 )
-
-
-# @borg.on(events.NewMessage(outgoing=True, pattern="^.ungmute(?: |$)(.*)")) # pylint:disable=E0602
-# async def ungmute_(eventUnGmute):
-#     if not eventUnGmute.text[0].isalpha() and eventUnGmute.text[0] \
-#             not in ("/", "#", "@", "!"):
-#         chat = await eventUnGmute.get_chat()
-#         admin = chat.admin_rights
-#         creator = chat.creator
-#         if not admin and not creator:
-#             await eventUnGmute.edit("`I am not an admin!`")
-#             return
-#         try:
-#             from sql_helpers.gmute_sql import ungmute
-#         except AttributeError:
-#             await eventUnGmute.edit("`Running on Non-SQL mode!`")
-#             return
-#         user = await get_user_from_event(eventUnGmute)
-#         if user:
-#             pass
-#         else:
-#             return
-#         await eventUnGmute.edit('```Ungmuting...```')
-
-#         if ungmute(user.id) is False:
-#             await eventUnGmute.edit("`Error! User probably not gmuted.`")
-#         else:
-#             await eventUnGmute.edit("```Ungmuted Successfully```")
-
-#             if ENABLE_LOG:
-#                 await eventUnGmute.client.send_message(
-#                     LOGGING_CHATID,
-#                     "#UNGMUTE\n"
-#                     f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-#                     f"CHAT: {eventUnGmute.chat.title}(`{eventUnGmute.chat_id}`)"
-#                 )
-
-
-# @borg.on(events.NewMessage(outgoing=True, pattern="^.delusers(?: |$)(.*)")) # pylint:disable=E0602
-# async def rm_deletedacc(eventDeletedAccs):
-#     if not eventDeletedAccs.text[0].isalpha() and eventDeletedAccs.text[0] not in ("/", "#", "@", "!"):
-#         con = eventDeletedAccs.pattern_match.group(1)
-#         del_u = 0
-#         del_status = "`No deleted accounts found, Group is cleaned as Hell`"
-
-#         if not eventDeletedAccs.is_group:
-#             await eventDeletedAccs.edit("`This command is only for groups!`")
-#             return
-#         if con != "clean":
-#             await eventDeletedAccs.edit("`Searching for ded af accounts...`")
-#             async for user in eventDeletedAccs.client.iter_participants(
-#                     eventDeletedAccs.chat_id
-#             ):
-#                 if user.deleted:
-#                     del_u += 1
-
-#             if del_u > 0:
-#                 del_status = f"found **{del_u}** deleted account(s) in this group \
-#                 \nClean them by using .delusers clean"
-#             await eventDeletedAccs.edit(del_status)
-#             return
-#         chat = await eventDeletedAccs.get_chat()
-#         admin = chat.admin_rights
-#         creator = chat.creator
-#         if not admin and not creator:
-#             await eventDeletedAccs.edit("`I am not an admin here!`")
-#             return
-#         await eventDeletedAccs.edit("`Deleting deleted accounts...\nOh I can do that?!?!`")
-#         del_u = 0
-#         del_a = 0
-#         async for user in eventDeletedAccs.client.iter_participants(
-#                 eventDeletedAccs.chat_id
-#         ):
-#             if user.deleted:
-#                 try:
-#                     await eventDeletedAccs.client(
-#                         EditBannedRequest(
-#                             eventDeletedAccs.chat_id,
-#                             user.id,
-#                             BANNED_RIGHTS
-#                         )
-#                     )
-#                 except ChatAdminRequiredError:
-#                     await eventDeletedAccs.edit("`I don't have ban rights in this group`")
-#                     return
-#                 except UserAdminInvalidError:
-#                     del_u -= 1
-#                     del_a += 1
-#                 await eventDeletedAccs.client(
-#                     EditBannedRequest(
-#                         eventDeletedAccs.chat_id,
-#                         user.id,
-#                         UNBAN_RIGHTS
-#                     )
-#                 )
-#                 del_u += 1
-#         if del_u > 0:
-#             del_status = f"Cleaned **{del_u}** deleted account(s)"
-#         if del_a > 0:
-#             del_status = f"Cleaned **{del_u}** deleted account(s) \
-#             \n**{del_a}** deleted admin accounts are not removed."
-#         await eventDeletedAccs.edit(del_status)
-
-
-# @borg.on(events.NewMessage(outgoing=True, pattern="^.adminlist$")) # pylint:disable=E0602
-# async def listadmins(eventListAdmins):
-#     if not eventListAdmins.text[0].isalpha() and eventListAdmins.text[0] not in ("/", "#", "@", "!"):
-#         if not eventListAdmins.is_group:
-#             await eventListAdmins.edit("I don't think this is a group.")
-#             return
-#         info = await eventListAdmins.client.get_entity(eventListAdmins.chat_id)
-#         title = info.title if info.title else "this chat"
-#         mentions = f'<b>Admins in {title}:</b> \n'
-#         try:
-#             async for user in eventListAdmins.client.iter_participants(
-#                     eventListAdmins.chat_id, filter=ChannelParticipantsAdmins
-#             ):
-#                 if not user.deleted:
-#                     link = f"<a href=\"tg://user?id={user.id}\">{user.first_name}</a>"
-#                     userid = f"<code>{user.id}</code>"
-#                     mentions += f"\n{link} {userid}"
-#                 else:
-#                     mentions += f"\nDeleted Account <code>{user.id}</code>"
-#         except ChatAdminRequiredError as err:
-#             mentions += " " + str(err) + "\n"
-#         await eventListAdmins.edit(mentions, parse_mode="html")
-
-
-# @borg.on(events.NewMessage(outgoing=True, pattern="^.pin(?: |$)(.*)")) # pylint:disable=E0602
-# async def pinmessage(eventPinMessage):
-#     if not eventPinMessage.text[0].isalpha() and eventPinMessage.text[0] not in ("/", "#", "@", "!"):
-#         chat = await eventPinMessage.get_chat()
-#         admin = chat.admin_rights
-#         creator = chat.creator
-#         if not admin and not creator:
-#             await eventPinMessage.edit("`I am not an admin!`")
-#             return
-#         to_pin = eventPinMessage.reply_to_msg_id
-#         if not to_pin:
-#             await eventPinMessage.edit("`Reply to a message to pin it.`")
-#             return
-#         options = eventPinMessage.pattern_match.group(1)
-#         is_silent = True
-#         if options.lower() == "loud":
-#             is_silent = False
-#         try:
-#             await eventPinMessage.client(UpdatePinnedMessageRequest(eventPinMessage.to_id, to_pin, is_silent))
-#         except BadRequestError:
-#             await eventPinMessage.edit("`I don't have sufficient permissions!`")
-#             return
-#         await eventPinMessage.edit("`Pinned Successfully!`")
-#         user = await get_user_from_id(eventPinMessage.from_id, eventPinMessage)
-#         if ENABLE_LOG:
-#             await eventPinMessage.client.send_message(
-#                 LOGGING_CHATID,
-#                 "#PIN\n"
-#                 f"ADMIN: [{user.first_name}](tg://user?id={user.id})\n"
-#                 f"CHAT: {eventPinMessage.chat.title}(`{eventPinMessage.chat_id}`)\n"
-#                 f"LOUD: {not is_silent}"
-#             )
-
-
-# @borg.on(events.NewMessage(outgoing=True, pattern="^.kick(?: |$)(.*)")) # pylint:disable=E0602
-# async def kick(eventKickUser):
-#     if not eventKickUser.text[0].isalpha() and eventKickUser.text[0] not in ("/", "#", "@", "!"):
-#         chat = await eventKickUser.get_chat()
-#         admin = chat.admin_rights
-#         creator = chat.creator
-#         if not admin and not creator:
-#             await eventKickUser.edit("`I am not an admin!`")
-#             return
-#         user = await get_user_from_event(eventKickUser)
-#         if not user:
-#             await eventKickUser.edit("`Couldn't fetch user.`")
-#             return
-#         await eventKickUser.edit("`Kicking this users...`")
-#         try:
-#             await eventKickUser.client(
-#                 EditBannedRequest(
-#                     eventKickUser.chat_id,
-#                     user.id,
-#                     KICK_RIGHTS
-#                 )
-#             )
-#             await sleep(.5)
-#         except BadRequestError:
-#             await eventKickUser.edit("`I don't have sufficient permissions!`")
-#             return
-#         await eventKickUser.client(
-#             EditBannedRequest(
-#                 eventKickUser.chat_id,
-#                 user.id,
-#                 ChatBannedRights(until_date=None)
-#             )
-#         )
-#         await eventKickUser.edit(f"[{user.first_name}](tg://user?id={user.id})` `atıldı` !`")
-#         if ENABLE_LOG:
-#             await eventKickUser.client.send_message(
-#                 LOGGING_CHATID,
-#                 "#KICK\n"
-#                 f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-#                 f"CHAT: {eventKickUser.chat.title}(`{eventKickUser.chat_id}`)\n"
-#             )
-
-
-# @borg.on(events.NewMessage(outgoing=True, pattern="^.userslist ?(.*)")) # pylint:disable=E0602
-# async def list_users(eventListUsers):
-#     if not eventListUsers.text[0].isalpha() and eventListUsers.text[0] not in ("/", "#", "@", "!"):
-#         if not eventListUsers.is_group:
-#             await eventListUsers.edit("Are you sure this is a group?")
-#             return
-#         info = await eventListUsers.client.get_entity(eventListUsers.chat_id)
-#         title = info.title if info.title else "this chat"
-#         mentions = 'Users in {}: \n'.format(title)
-#         try:
-#             if not eventListUsers.pattern_match.group(1):
-#                 async for user in eventListUsers.client.iter_participants(eventListUsers.chat_id):
-#                     if not user.deleted:
-#                         mentions += f"\n[{user.first_name}](tg://user?id={user.id}) `{user.id}`"
-#                     else:
-#                         mentions += f"\nDeleted Account `{user.id}`"
-#             else:
-#                 searchq = eventListUsers.pattern_match.group(1)
-#                 async for user in eventListUsers.client.iter_participants(eventListUsers.chat_id, search=f'{searchq}'):
-#                     if not user.deleted:
-#                         mentions += f"\n[{user.first_name}](tg://user?id={user.id}) `{user.id}`"
-#                     else:
-#                         mentions += f"\nDeleted Account `{user.id}`"
-#         except ChatAdminRequiredError as err:
-#             mentions += " " + str(err) + "\n"
-#         try:
-#             await eventListUsers.edit(mentions)
-#         except MessageTooLongError:
-#             await eventListUsers.edit("Damn, this is a huge group. Uploading users lists as file.")
-#             file = open("userslist.txt", "w+")
-#             file.write(mentions)
-#             file.close()
-#             await eventListUsers.client.send_file(
-#                 eventListUsers.chat_id,
-#                 "userslist.txt",
-#                 caption='Users in {}'.format(title),
-#                 reply_to=eventListUsers.id,
-#             )
-#             remove("userslist.txt")
-
-# @borg.on(admin_cmd(pattern="undlt ?(.*)")) # pylint:disable=E0602
-# async def _(event):
-#     if event.fwd_from:
-#         return
-#     c = await event.get_chat()
-#     if c.admin_rights or c.creator:
-#         a = await borg.get_admin_log(event.chat_id,limit=5, edit=False, delete=True)
-#         # print(a[0].old.message)
-#         deleted_msg = "Deleted message in this group:"
-#         for i in a:
-#             deleted_msg += "\n👉`{}`".format(i.old.message)
-#         await event.edit(deleted_msg)
-#     else:
-#         await event.edit("`You need administrative permissions in order to do this command`")
-#         await asyncio.sleep(3)
-#         await event.delete()
-
-
-# async def get_user_from_event(event):
-#     if event.reply_to_msg_id:
-#         previous_message = await event.get_reply_message()
-#         user_obj = await event.client.get_entity(previous_message.from_id)
-#     else:
-#         user = event.pattern_match.group(1)
-#         if user.isnumeric():
-#             user = int(user)
-#         if not user:
-#             await event.edit("`Pass the user's username, id or reply!`")
-#             return
-#         if event.message.entities is not None:
-#             probable_user_mention_entity = event.message.entities[0]
-
-#             if isinstance(probable_user_mention_entity, MessageEntityMentionName):
-#                 user_id = probable_user_mention_entity.user_id
-#                 user_obj = await event.client.get_entity(user_id)
-#                 return user_obj
-#         try:
-#             user_obj = await event.client.get_entity(user)
-#         except (TypeError, ValueError) as err:
-#             await event.edit(str(err))
-#             return None
-#     return user_obj
-
-# async def get_user_from_id(user, event):
-#     if isinstance(user, str):
-#         user = int(user)
-#     try:
-#         user_obj = await event.client.get_entity(user)
-#     except (TypeError, ValueError) as err:
-#         await event.edit(str(err))
-#         return None
-#     return user_obj
->>>>>>> 8c5d80a65220510d09d9850be5dbd5406c65a205

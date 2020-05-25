@@ -1,11 +1,12 @@
 import os
 import time
-from pyrogram import Filters
 
-from pyrobot import app, cmd
+from pyrogram import Client, Filters
+
+from pyrobot import COMMAND_HAND_LER
 
 
-@app.on_message(Filters.command(["fwd"], cmd) & Filters.me)
+@Client.on_message(Filters.command(["fwd"], COMMAND_HAND_LER) & Filters.me)
 async def for_ward(client, message):
       FORWARD_TARGET=os.environ.get("FORWARD_ID")
       if not FORWARD_TARGET:

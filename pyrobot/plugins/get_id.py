@@ -1,7 +1,7 @@
-from pyrogram import Filters
-from pyrobot import app, cmd
+from pyrogram import Filters,Client
+from pyrobot import COMMAND_HAND_LER
 
-@app.on_message(Filters.command(["get_id"], cmd) & Filters.me)
+@Client.on_message(Filters.command(["get_id"], COMMAND_HAND_LER) & Filters.me)
 async def get_ids(client, message):
       if message.reply_to_message:
          chat = message.reply_to_message.from_user.id
