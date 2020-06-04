@@ -20,7 +20,7 @@ NO_PM_LOG_USERS = []
 async def log(client, message):
     if LOG_PM_ACTIVE and  message.chat.type != "bot":
         chat = await client.resolve_peer(message.chat.id)
-        if chat.chat_id not in NO_PM_LOG_USERS:
+        if chat.user_id not in NO_PM_LOG_USERS:
             try:
                 e = PM_LOGGR_BOT_API_ID
                 fwd_message = await client.forward_messages(
