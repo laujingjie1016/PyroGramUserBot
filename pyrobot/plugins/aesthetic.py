@@ -20,7 +20,7 @@ def aesthetify(string):
         yield chr(c)
 
 
-@Client.on_message(Filters.command("ae", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command(["ae"], COMMAND_HAND_LER)  & Filters.me)
 async def aesthetic(client, message):
     text = message.command[1:]
     text = "".join(aesthetify(text))
