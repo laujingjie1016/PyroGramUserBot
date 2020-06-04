@@ -22,6 +22,7 @@ def aesthetify(string):
 
 @Client.on_message(Filters.command(["ae"], COMMAND_HAND_LER)  & Filters.me)
 async def aesthetic(client, message):
-    text = str(message.command[1:])
+    # text = str(message.command[1:])
+    text = "".join(str(e) for e in message.command[1:])
     text = "".join(aesthetify(text))
     await message.edit(text)
