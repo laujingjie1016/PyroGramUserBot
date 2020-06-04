@@ -26,7 +26,7 @@ async def log(client, message):
                 fwd_message = client.forward_messages(
                     chat_id=chat.id,
                     from_chat_id=e,
-                    message_ids=message.id
+                    message_ids=message.message_id
                 )
             except Exception as e:
                 # logger.warning(str(e))
