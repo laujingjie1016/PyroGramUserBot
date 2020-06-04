@@ -56,6 +56,6 @@ async def purge(client, message):
         #     f"<u>purged</u> {purged_messages_count} messages in {time_taken_s} seconds."
         # )
         # await asyncio.sleep(5)
-        # await message.delete()
+        await message.delete()
     else:
         await message.edit("Reply to a message to purge [user's] messages.")
