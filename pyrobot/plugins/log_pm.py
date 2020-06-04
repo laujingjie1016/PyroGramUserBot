@@ -19,13 +19,13 @@ NO_PM_LOG_USERS = []
 @Client.on_message(Filters.text & Filters.private)
 async def log(client, message):
     if LOG_PM_ACTIVE and  message.chat.type != "bot":
-        chat = message.chat.id
-        if chat not in NO_PM_LOG_USERS:
+        chat = await client.resolve_peer(message.chat.id)
+        if chat.chat_id not in NO_PM_LOG_USERS:
             try:
                 e = PM_LOGGR_BOT_API_ID
                 fwd_message = await client.forward_messages(
                     chat_id=e,
-                    from_chat_id=chat,
+                    from_chat_id=chat.chat_id,
                     message_ids=message.message_id
                 )
             except Exception as e:
