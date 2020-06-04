@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 
 import barcode
-from barcode.writer import ImageWriter
+# from barcode.writer import ImageWriter
 from pyrogram import Client, Filters
 
 from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
