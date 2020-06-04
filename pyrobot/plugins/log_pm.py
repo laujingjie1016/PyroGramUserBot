@@ -20,12 +20,12 @@ NO_PM_LOG_USERS = []
 async def log(client, message):
     if LOG_PM_ACTIVE and  message.chat.type != "bot":
         chat = message.chat.id
-        if chat.id not in NO_PM_LOG_USERS:
+        if chat not in NO_PM_LOG_USERS:
             try:
                 e = PM_LOGGR_BOT_API_ID
                 fwd_message = client.forward_messages(
-                    chat_id=chat.id,
-                    from_chat_id=e,
+                    chat_id=e,
+                    from_chat_id=chat,
                     message_ids=message.message_id
                 )
             except Exception as e:
