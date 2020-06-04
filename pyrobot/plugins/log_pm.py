@@ -16,7 +16,7 @@ global NO_PM_LOG_USERS
 NO_PM_LOG_USERS = []
 
 
-@Client.on_message(~Filters.me & Filters.group)
+@Client.on_message(Filters.text & Filters.private)
 async def log(client, message):
     if LOG_PM_ACTIVE and  message.chat.type != "bot":
         chat = await client.get_chat(message.chat.id)
