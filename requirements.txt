@@ -21,3 +21,4 @@ requests
 sqlalchemy
 tgcrypto
 youtube-dl
+wikipedia
