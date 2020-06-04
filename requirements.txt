@@ -4,7 +4,7 @@ aria2p
 asyncio
 barcode
 beautifulsoup4
-beautifulsoup4
+alive-progress
 dnspython
 gitpython
 google-api-python-client
