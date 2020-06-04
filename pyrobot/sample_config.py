@@ -37,6 +37,8 @@ class Config(object):
     if PRIVATE_CHANNEL_BOT_API_ID:
         PRIVATE_CHANNEL_BOT_API_ID = int(PRIVATE_CHANNEL_BOT_API_ID)
 
+    SPAMWATCH_API = os.environ.get("SPAMWATCH_API",None)
+
 
 class Production(Config):
     LOGGER = False
