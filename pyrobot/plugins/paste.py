@@ -1,7 +1,7 @@
 import logging
 import os
 
-from pyrogram import Client
+from pyrogram import Client, Filters
 from requests import get, post
 from requests.exceptions import HTTPError, Timeout, TooManyRedirects
 
