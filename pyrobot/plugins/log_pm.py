@@ -23,7 +23,7 @@ async def log(client, message):
         if chat not in NO_PM_LOG_USERS:
             try:
                 e = PM_LOGGR_BOT_API_ID
-                fwd_message = client.forward_messages(
+                fwd_message = await client.forward_messages(
                     chat_id=e,
                     from_chat_id=chat,
                     message_ids=message.message_id
