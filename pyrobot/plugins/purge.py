@@ -42,7 +42,7 @@ async def purge(client, message):
                     list_of_messages_to_delete.append(a_message.message_id)
             else:
                 list_of_messages_to_delete.append(a_message.message_id)
-        print(list_of_messages_to_delete)
+        # print(list_of_messages_to_delete)
         await client.delete_messages(
             chat_id=message.chat.id,
             message_ids=list_of_messages_to_delete,
@@ -52,10 +52,10 @@ async def purge(client, message):
         list_of_messages_to_delete = []
         end_t = datetime.now()
         time_taken_s = (end_t - start_t).seconds
-        await message.edit(
-            f"<u>purged</u> {purged_messages_count} messages in {time_taken_s} seconds."
-        )
-        await asyncio.sleep(5)
-        await message.delete()
+        # await message.edit(
+        #     f"<u>purged</u> {purged_messages_count} messages in {time_taken_s} seconds."
+        # )
+        # await asyncio.sleep(5)
+        # await message.delete()
     else:
         await message.edit("Reply to a message to purge [user's] messages.")
