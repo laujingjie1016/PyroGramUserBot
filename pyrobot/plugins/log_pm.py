@@ -22,9 +22,9 @@ async def log(client, message):
         chat = await client.resolve_peer(message.chat.id)
         if chat.user_id not in NO_PM_LOG_USERS:
             try:
-                e = PM_LOGGR_BOT_API_ID
+                e = await client.resolve_peer(PM_LOGGR_BOT_API_ID)
                 fwd_message = await client.forward_messages(
-                    chat_id=e,
+                    chat_id=e.chat_id,
                     from_chat_id=chat.user_id,
                     message_ids=message.message_id
                 )
