@@ -25,7 +25,7 @@ async def log(client, message):
                 e = PM_LOGGR_BOT_API_ID
                 fwd_message = await client.forward_messages(
                     chat_id=e,
-                    from_chat_id=chat.chat_id,
+                    from_chat_id=chat.user_id,
                     message_ids=message.message_id
                 )
             except Exception as e:
