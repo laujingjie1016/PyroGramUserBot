@@ -44,7 +44,7 @@ async def count_(client: Client, message):
     client_infos = response.get("client")
     i_s_p = client_infos.get("isp")
     i_s_p_rating = client_infos.get("isprating")
-    reply_msg_id = message.reply_to_message.message_id
+    reply_msg_id = message.reply_to_message
     if reply_msg_id:
         reply_msg_id = message.reply_to_message.message_id
     try:
