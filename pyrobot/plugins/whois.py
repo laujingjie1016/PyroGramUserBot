@@ -37,7 +37,7 @@ async def who_is(client, message):
             photo=local_user_photo,
             quote=True,
             caption=message_out_str,
-            parse_mode="html",
+            parse_mode="markdown",
             # ttl_seconds=,
             disable_notification=True
         )

@@ -38,6 +38,8 @@ class Config(object):
         PRIVATE_CHANNEL_BOT_API_ID = int(PRIVATE_CHANNEL_BOT_API_ID)
 
     SPAMWATCH_API = os.environ.get("SPAMWATCH_API",None)
+    PM_LOGGR_BOT_API_ID = os.environ.get("PM_LOGGR_BOT_API_ID","True")
+    LOG_PM_ACTIVE = os.environ.get("LOG_PM_ACTIVE",True)
 
 
 class Production(Config):
