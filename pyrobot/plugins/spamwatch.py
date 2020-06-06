@@ -8,7 +8,7 @@ from pyrogram.api import functions, types
 from pyrogram.errors import *
 import spamwatch
 
-from pyrobot import SPAMWATCH_API,LOGGER_GROUP
+from pyrobot import SPAMWATCH_API, LOGGER_GROUP
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -16,7 +16,6 @@ logger = logging.getLogger(__name__)
 admin = 'administrator'
 creator = 'creator'
 ranks = [admin, creator]
-
 
 
 async def AdminCheck(message):
@@ -37,8 +36,10 @@ async def AdminCheck(message):
         else:
             await message.edit("__No permissions to restrict Members__")
 
+
 async def RestrictFailed(message):
     await message.edit(f"I can't {message.command[0]} this user.")
+
 
 @Client.on_message(~Filters.me & Filters.group & (Filters.text | Filters.new_chat_members))
 async def user_list(client: Client, message):
@@ -53,23 +54,23 @@ async def user_list(client: Client, message):
             user_id = message.from_user.id
             firstname = message.from_user.first_name
     except Exception:
-        return  
-    if SPAMWATCH_API:
+        return
+    if SPAMWATCH_API is not None:
         try:
-            if SPAMWATCH_API is not None:
-                WATCH = spamwatch.Client(SPAMWATCH_API)
-                intruder = WATCH.get_ban(user_id)
-                if intruder and await AdminCheck(message):
-                    await client.kick_chat_member(chat_id, user_id)
-                    txt = r"\\**#Antispam_Log**//" \
-                        "\n\n**GBanned User $SPOTTED**\n" \
-                        "**#SPAMWATCH_API BAN**" \
-                        f"\n**User:** [{firstname}](tg://user?id={user_id})\n" \
-                        f"**ID:** `{user_id}`\n**Reason:** `{intruder.reason}`\n" \
-                        "**Quick Action:** Banned in {message.chat.title}\n\n$AUTOBAN #id{user_id}"
-                    await client.send_message(
-                        chat_id=LOGGER_GROUP,
-                        text=txt  
-                    )
+
+            WATCH = spamwatch.Client(SPAMWATCH_API)
+            intruder = WATCH.get_ban(user_id)
+            if intruder and await AdminCheck(message):
+                await client.kick_chat_member(chat_id, user_id)
+                txt = r"\\**#Antispam_Log**//" \
+                    "\n\n**GBanned User $SPOTTED**\n" \
+                    "**#SPAMWATCH_API BAN**" \
+                    f"\n**User:** [{firstname}](tg://user?id={user_id})\n" \
+                    f"**ID:** `{user_id}`\n**Reason:** `{intruder.reason}`\n" \
+                    "**Quick Action:** Banned in {message.chat.title}\n\n$AUTOBAN #id{user_id}"
+                await client.send_message(
+                    chat_id=LOGGER_GROUP,
+                    text=txt
+                )
         except Exception:
             pass
