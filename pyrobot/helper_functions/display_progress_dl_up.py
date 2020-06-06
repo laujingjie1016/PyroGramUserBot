@@ -11,12 +11,13 @@ from alive_progress import alive_bar
 
 
 async def progress_for_pyrogram(
-    current,
-    total,
-    ud_type,
-    message,
-    start
+        current,
+        total,
+        ud_type,
+        message,
+        start
 ):
+    """ generic progress display for Telegram Upload / Download status """
     now = time.time()
     diff = now - start
     if round(diff % 10.00) == 0 or current == total:
@@ -28,7 +29,8 @@ async def progress_for_pyrogram(
         estimated_total_time = elapsed_time + time_to_completion
 
         elapsed_time = time_formatter(milliseconds=elapsed_time)
-        estimated_total_time = time_formatter(milliseconds=estimated_total_time)
+        estimated_total_time = time_formatter(
+            milliseconds=estimated_total_time)
 
         progress = "[{0}{1}] \nP: {2}%\n".format(
             ''.join("█" for i in range(math.floor(percentage / 5))),
@@ -44,7 +46,7 @@ async def progress_for_pyrogram(
         )
         try:
             await message.edit(
-                text="{}\n {}".format(
+                "{}\n {}".format(
                     ud_type,
                     tmp
                 )
@@ -53,46 +55,29 @@ async def progress_for_pyrogram(
             pass
 
 
-async def progress(current,total,message,start,type_of_ps):
-    now = time.time()
-    diff = now -start
-    if round(diff % 10.00)== 0 or current == total:
-        percentage = current * 100 / total
-        speed = current / diff
-        elapsed_time = round(diff) * 1000
-        time_to_completion = round((total - current)/speed) * 1000
-        estimated_total_time = elapsed_time + time_to_completion
-        with alive_bar(100, bar='blocks') as bar:
-            for i in range(100):
-                await asyncio.sleep(5)
-                progress_str = bar()
-        tmp = progress_str + \
-            "{0} of {1}\nETA: {2}".format(
-                humanbytes(current),
-                humanbytes(total),
-                time_formatter(estimated_total_time)
-            )
-        await message.edit_text("{}\n {}".format(
-            type_of_ps,
-            tmp
-        ))
-
-
-def humanbytes(size):
+def humanbytes(size: int) -> str:
+    """ converts bytes into human readable format """
     # https://stackoverflow.com/a/49361727/4723940
     # 2**10 = 1024
     if not size:
         return ""
-    power = 2**10
-    n = 0
-    Dic_powerN = {0: ' ', 1: 'Ki', 2: 'Mi', 3: 'Gi', 4: 'Ti'}
+    power = 2 ** 10
+    number = 0
+    dict_power_n = {
+        0: " ",
+        1: "Ki",
+        2: "Mi",
+        3: "Gi",
+        4: "Ti"
+    }
     while size > power:
         size /= power
-        n += 1
-    return str(round(size, 2)) + " " + Dic_powerN[n] + 'B'
+        number += 1
+    return str(round(size, 2)) + " " + dict_power_n[number] + 'B'
 
 
 def time_formatter(milliseconds: int) -> str:
+    """ converts seconds into human readable format """
     seconds, milliseconds = divmod(int(milliseconds), 1000)
     minutes, seconds = divmod(seconds, 60)
     hours, minutes = divmod(minutes, 60)

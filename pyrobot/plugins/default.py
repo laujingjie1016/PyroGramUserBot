@@ -1,19 +1,21 @@
 """ The core 'pyrobot' module"""
 
-from importlib import import_module, reload
 import os
+from importlib import import_module, reload
 from pathlib import Path
 from pyrogram import Client, Filters
 from pyrogram.client.handlers.handler import Handler
-
-
 from pyrobot import (
-    COMMAND_HAND_LER, LOGGER
+    COMMAND_HAND_LER,
+    LOGGER
 )
+from pyrobot.helper_functions.cust_p_filters import sudo_filter
 
-@Client.on_message(Filters.command("load", COMMAND_HAND_LER)  & Filters.me)
+
+@Client.on_message(Filters.command(["load", "install"], COMMAND_HAND_LER) & sudo_filter)
 async def load_plugin(client, message):
-    await message.edit("Processing ...")
+    """ load TG Plugins """
+    status_message = await message.reply("Processing ...")
     try:
         if message.reply_to_message is not None:
             down_loaded_plugin_name = await message.reply_to_message.download(
@@ -38,7 +40,7 @@ async def load_plugin(client, message):
                     # noinspection PyBroadException
                     try:
                         handler, group = getattr(module, name).handler
-    
+
                         if isinstance(handler, Handler) and isinstance(group, int):
                             client.add_handler(handler, group)
                             LOGGER.info(
@@ -50,15 +52,14 @@ async def load_plugin(client, message):
                                     module_path
                                 )
                             )
-    
+
                             lded_count += 1
-                    except Exception as e:
-                        # LOGGER.info(str(e))
+                    except Exception:
                         pass
-                await message.edit(
+                await status_message.edit(
                     f"installed {lded_count} commands / plugins"
                 )
     except Exception as error:
-        await message.edit(
-             f"ERROR: `{error}`"
+        await status_message.edit(
+            f"ERROR: <code>{error}</code>"
         )
