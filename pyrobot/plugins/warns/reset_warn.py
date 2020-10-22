@@ -1,16 +1,11 @@
 import json
+
 from pyrogram import filters
-from pyrogram.types import (
-    Message
-)
-from pyrobot import (
-    COMMAND_HAND_LER,
-    WARN_DATA_ID
-)
+from pyrogram.types import Message
+
+from pyrobot import COMMAND_HAND_LER, WARN_DATA_ID
+from pyrobot.helper_functions.cust_p_filters import admin_fliter
 from pyrobot.pyrobot import PyroBot
-from pyrobot.helper_functions.cust_p_filters import (
-    admin_fliter
-)
 
 
 @PyroBot.on_message(

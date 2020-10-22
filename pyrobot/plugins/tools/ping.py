@@ -2,10 +2,10 @@
 Syntax: .ping"""
 
 import time
+
 from pyrogram import Client, filters
-from pyrobot import (
-    COMMAND_HAND_LER
-)
+
+from pyrobot import COMMAND_HAND_LER
 from pyrobot.helper_functions.cust_p_filters import f_onw_fliter
 
 # -- Constants -- #

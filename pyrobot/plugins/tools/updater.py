@@ -3,15 +3,12 @@ Syntax: .update"""
 
 import asyncio
 import os
+
 import git
 from pyrogram import Client, filters
-from pyrobot import (
-    COMMAND_HAND_LER,
-    HEROKU_API_KEY,
-    LOGGER,
-    MAX_MESSAGE_LENGTH,
-    OFFICIAL_UPSTREAM_REPO
-)
+
+from pyrobot import (COMMAND_HAND_LER, HEROKU_API_KEY, LOGGER,
+                     MAX_MESSAGE_LENGTH, OFFICIAL_UPSTREAM_REPO)
 from pyrobot.helper_functions.cust_p_filters import sudo_filter
 
 # -- Constants -- #

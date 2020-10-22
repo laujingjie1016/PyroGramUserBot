@@ -1,20 +1,10 @@
-from pyrogram import (
-    Client,
-    filters
-)
-from pyrogram.types import (
-    InlineKeyboardMarkup
-)
-from pyrobot import (
-    COMMAND_HAND_LER,
-    DB_URI,
-    TG_URI
-)
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardMarkup
+
+from pyrobot import COMMAND_HAND_LER, DB_URI, TG_URI
 from pyrobot.helper_functions.cust_p_filters import admin_fliter
-from pyrobot.helper_functions.msg_types import (
-    get_note_type,
-    Types
-)
+from pyrobot.helper_functions.msg_types import Types, get_note_type
+
 if DB_URI is not None:
     import pyrobot.helper_functions.sql_helpers.notes_sql as sql
 

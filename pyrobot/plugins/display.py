@@ -1,6 +1,7 @@
 import math
 import time
 
+
 async def progress_for_pyrogram(client, current, total, message, start, type_of_ps):
     now = time.time()
     diff = now - start

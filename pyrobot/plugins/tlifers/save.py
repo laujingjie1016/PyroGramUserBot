@@ -1,19 +1,12 @@
 import json
+
 from pyrogram import filters
-from pyrogram.types import (
-    InlineKeyboardMarkup
-)
-from pyrobot import (
-    COMMAND_HAND_LER,
-    TG_URI,
-    TG_IRU_S_M_ID
-)
-from pyrobot.pyrobot import PyroBot
+from pyrogram.types import InlineKeyboardMarkup
+
+from pyrobot import COMMAND_HAND_LER, TG_IRU_S_M_ID, TG_URI
 from pyrobot.helper_functions.cust_p_filters import admin_fliter
-from pyrobot.helper_functions.msg_types import (
-    get_note_type,
-    Types
-)
+from pyrobot.helper_functions.msg_types import Types, get_note_type
+from pyrobot.pyrobot import PyroBot
 
 
 @PyroBot.on_message(

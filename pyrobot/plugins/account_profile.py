@@ -12,9 +12,6 @@ from pyrogram.api.functions.account import UpdateProfile
 from pyrogram.api.functions.photos import UpdateProfilePhoto
 
 from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
-from pyrogram.api import functions
-
-from pyrobot import TMP_DOWNLOAD_DIRECTORY
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

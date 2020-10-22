@@ -6,13 +6,12 @@
 import os
 import random
 import time
+
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from PIL import Image
-from pyrobot import (
-    TMP_DOWNLOAD_DIRECTORY,
-    TL_VID_STREAM_TYPES
-)
+
+from pyrobot import TL_VID_STREAM_TYPES, TMP_DOWNLOAD_DIRECTORY
 from pyrobot.helper_functions.run_shell_cmnd import run_command
 
 

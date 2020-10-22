@@ -1,9 +1,9 @@
 """Get info about the replied user
 Syntax: .whois"""
 
-from pyrogram import Client, Filters
-
 import os
+
+from pyrogram import Client, Filters
 
 from pyrobot import COMMAND_HAND_LER
 

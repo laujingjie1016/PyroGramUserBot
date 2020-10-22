@@ -1,5 +1,6 @@
 from sqlalchemy import Boolean, Column, Numeric
-from pyrobot.helper_functions.sql_helpers import SESSION, BASE
+
+from pyrobot.helper_functions.sql_helpers import BASE, SESSION
 
 
 class Welcome(BASE):

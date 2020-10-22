@@ -8,15 +8,14 @@
 """IX.IO pastebin like site
 Syntax: .paste"""
 
-import aiohttp
 import json
 import os
 from urllib.parse import urlparse
+
+import aiohttp
 from pyrogram import Client, filters
-from pyrobot import (
-    COMMAND_HAND_LER,
-    TMP_DOWNLOAD_DIRECTORY
-)
+
+from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
 
 
 @Client.on_message(filters.command("paste", COMMAND_HAND_LER))

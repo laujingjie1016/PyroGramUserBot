@@ -2,13 +2,9 @@
 # -*- coding: utf-8 -*-
 
 
-from pyrogram import (
-    filters
-)
-from pyrobot import (
-    SUDO_USERS,
-    USE_AS_BOT
-)
+from pyrogram import filters
+
+from pyrobot import SUDO_USERS, USE_AS_BOT
 from pyrobot.helper_functions.admin_check import admin_check
 
 

@@ -6,18 +6,14 @@ import json
 import os
 import shutil
 from datetime import datetime
+
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-from pyrogram.types import (
-    InputMediaDocument,
-    InputMediaVideo,
-    InputMediaAudio
-)
-from pyrobot import (
-    LOGGER,
-    TMP_DOWNLOAD_DIRECTORY
-)
-from pyrobot.helper_functions.check_if_thumb_exists import is_thumb_image_exists
+from pyrogram.types import InputMediaAudio, InputMediaDocument, InputMediaVideo
+
+from pyrobot import LOGGER, TMP_DOWNLOAD_DIRECTORY
+from pyrobot.helper_functions.check_if_thumb_exists import \
+    is_thumb_image_exists
 from pyrobot.helper_functions.run_shell_cmnd import run_command
 
 

@@ -2,7 +2,6 @@ from pyrobot import LOGGER, LOGGER_GROUP
 from pyrobot.__main__ import Main
 
 
-
 def LogMessage(logmsg):
     client = Main.main()
     if LOGGER:

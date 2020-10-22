@@ -3,12 +3,12 @@ import logging
 import os
 
 import pyrogram
+import spamwatch
 from pyrogram import Client, Filters
 from pyrogram.api import functions, types
 from pyrogram.errors import *
-import spamwatch
 
-from pyrobot import SPAMWATCH_API, LOGGER_GROUP
+from pyrobot import LOGGER_GROUP, SPAMWATCH_API
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

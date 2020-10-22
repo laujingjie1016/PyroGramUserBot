@@ -4,18 +4,15 @@
 
 
 import asyncio
-import aiohttp
 import json
 import os
+
+import aiohttp
 from PIL import Image
-from pyrogram.types import (
-    InlineKeyboardButton,
-    InlineKeyboardMarkup
-)
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
+from pyrobot import LOGGER
 from pyrobot.helper_functions.display_progress_dl_up import humanbytes
-from pyrobot import (
-    LOGGER
-)
 
 
 async def proc_ess_image_aqon(image_url: str, output_dir: str) -> str:

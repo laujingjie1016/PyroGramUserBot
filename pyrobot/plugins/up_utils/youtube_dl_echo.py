@@ -2,19 +2,14 @@
 /ytdl"""
 
 import os
-from pyrogram import (
-    Client,
-    filters
-)
-from pyrobot import (
-    COMMAND_HAND_LER,
-    TMP_DOWNLOAD_DIRECTORY
-)
+
+from pyrogram import Client, filters
+
+from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
 from pyrobot.helper_functions.cust_p_filters import sudo_filter
-from pyrobot.helper_functions.you_tube_dl_extractor import (
-    extract_youtube_dl_formats
-)
 from pyrobot.helper_functions.extract_link import extract_link
+from pyrobot.helper_functions.you_tube_dl_extractor import \
+    extract_youtube_dl_formats
 
 
 @Client.on_message(filters.command("ytdl", COMMAND_HAND_LER) & sudo_filter)

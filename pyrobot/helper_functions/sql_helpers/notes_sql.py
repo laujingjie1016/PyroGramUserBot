@@ -1,6 +1,8 @@
 import threading
-from sqlalchemy import Column, String, UnicodeText, Integer, func, distinct
-from pyrobot.helper_functions.sql_helpers import SESSION, BASE
+
+from sqlalchemy import Column, Integer, String, UnicodeText, distinct, func
+
+from pyrobot.helper_functions.sql_helpers import BASE, SESSION
 
 
 class Notes(BASE):

@@ -2,19 +2,14 @@
 Syntax: .setflood"""
 
 import asyncio
-from pyrogram import (
-    Client,
-    filters
-)
-from pyrogram.types import (
-    ChatPermissions
-)
-from pyrobot import (
-    COMMAND_HAND_LER,
-    DB_URI
-)
+
+from pyrogram import Client, filters
+from pyrogram.types import ChatPermissions
+
+from pyrobot import COMMAND_HAND_LER, DB_URI
 from pyrobot.helper_functions.admin_check import admin_check
 from pyrobot.helper_functions.cust_p_filters import f_onw_fliter
+
 if DB_URI is not None:
     import pyrobot.helper_functions.sql_helpers.antiflood_sql as sql
     CHAT_FLOOD = sql.__load_flood_settings()

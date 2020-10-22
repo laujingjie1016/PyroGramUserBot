@@ -5,9 +5,9 @@ import logging
 import time
 from datetime import datetime
 
+import speedtest
 from pyrogram import Client, Filters
 
-import speedtest
 from pyrobot import COMMAND_HAND_LER
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',

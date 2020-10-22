@@ -1,15 +1,8 @@
-from pyrogram import (
-    Client,
-    filters
-)
-from pyrobot import (
-    COMMAND_HAND_LER,
-    DB_URI,
-    TG_URI
-)
-from pyrobot.helper_functions.msg_types import (
-    get_file_id
-)
+from pyrogram import Client, filters
+
+from pyrobot import COMMAND_HAND_LER, DB_URI, TG_URI
+from pyrobot.helper_functions.msg_types import get_file_id
+
 if DB_URI is not None:
     import pyrobot.helper_functions.sql_helpers.notes_sql as sql
 

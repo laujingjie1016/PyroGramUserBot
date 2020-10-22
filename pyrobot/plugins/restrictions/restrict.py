@@ -1,10 +1,6 @@
-from pyrogram import (
-    Client,
-    filters
-)
-from pyrogram.types import (
-    ChatPermissions
-)
+from pyrogram import Client, filters
+from pyrogram.types import ChatPermissions
+
 from pyrobot import COMMAND_HAND_LER
 from pyrobot.helper_functions.admin_check import admin_check
 from pyrobot.helper_functions.extract_user import extract_user

@@ -11,8 +11,8 @@ from pyrogram.api import functions, types
 from pyrogram.api.types import DocumentAttributeVideo
 
 from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
-from pyrobot.helper_functions.display_progress_dl_up import \
-    progress_for_pyrogram , progress
+from pyrobot.helper_functions.display_progress_dl_up import (
+    progress, progress_for_pyrogram)
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
