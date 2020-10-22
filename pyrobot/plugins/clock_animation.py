@@ -18,7 +18,7 @@ async def clock(client: Client, message):
     if message.forward_from:
         return
     deq = deque(list("🕙🕘🕗🕖🕕🕔🕓🕒🕑🕐🕛"))
-    for a in range(48):
+    for _ in range(48):
         await asyncio.sleep(0.1)
         await message.edit("".join(deq))
         deq.rotate(1)

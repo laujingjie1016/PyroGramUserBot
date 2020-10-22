@@ -44,19 +44,18 @@ async def count_(client: Client, message):
             else:
                 message = previous_message.message_id
                 message = await client.get_messages(message.chat.id,previous_message.message_id)
-        # else:
-        #     message = "SYNTAX: `.paste <long text to include>`"
-        py_file =  ""
         if downloaded_file_name.endswith(".py"):
+            # else:
+            #     message = "SYNTAX: `.paste <long text to include>`"
+            py_file =  ""
             py_file += ".py"
             data = message
             key = requests.post('https://nekobin.com/api/documents', json={"content": data}).json().get('result').get('key')
             url = f'https://nekobin.com/{key}{py_file}'
-            reply_text = f'Nekofied to *Nekobin* : {url}'
-            await message.edit(reply_text)
         else:
             data = message
             key = requests.post('https://nekobin.com/api/documents', json={"content": data}).json().get('result').get('key')
             url = f'https://nekobin.com/{key}'
-            reply_text = f'Nekofied to *Nekobin* : {url}'
-            await message.edit(reply_text)
+
+        reply_text = f'Nekofied to *Nekobin* : {url}'
+        await message.edit(reply_text)

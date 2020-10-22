@@ -21,7 +21,5 @@ async def spam_spot(client, message):
     reply_message = None
     if message.reply_to_message:
         reply_message = await client.get_messages(message.chat.id,message.reply_to_message.message_id)
-        await message.reply(mentions)
-    else:
-        await message.reply(mentions)
+    await message.reply(mentions)
     await message.delete()

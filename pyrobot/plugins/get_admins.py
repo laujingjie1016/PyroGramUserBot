@@ -10,11 +10,11 @@ async def get_admins(client, message):
       if not input_str:
          input_str = message.chat.id
       try:
-         async for x in client.iter_chat_members(chat_id=input_str, filter="administrators"):
-               if x.status == "creator":
-                   mentions += "\n 👑 [{}](tg://user?id={}) `{}`".format(x.user.first_name, x.user.id, x.user.id)
-               if x.status == "administrator":
-                   mentions += "\n ⚜ [{}](tg://user?id={}) `{}`".format(x.user.first_name, x.user.id, x.user.id)
+            async for x in client.iter_chat_members(chat_id=input_str, filter="administrators"):
+                  if x.status == "administrator":
+                        mentions += "\n ⚜ [{}](tg://user?id={}) `{}`".format(x.user.first_name, x.user.id, x.user.id)
+                  elif x.status == "creator":
+                        mentions += "\n 👑 [{}](tg://user?id={}) `{}`".format(x.user.first_name, x.user.id, x.user.id)
       except Exception as e:
              mentions += " " + str(e) + "\n"
       await message.edit(mentions)
@@ -26,11 +26,11 @@ async def men_admins(client, message):
       if not input_str:
          input_str = message.chat.id
       try:
-         async for x in client.iter_chat_members(chat_id=input_str, filter="administrators"):
-               if x.status == "creator":
-                   mentions += "\n 👑 [{}](tg://user?id={}) `{}`".format(x.user.first_name, x.user.id, x.user.id)
-               if x.status == "administrator":
-                   mentions += "\n ⚜ [{}](tg://user?id={}) `{}`".format(x.user.first_name, x.user.id, x.user.id)
+            async for x in client.iter_chat_members(chat_id=input_str, filter="administrators"):
+                  if x.status == "administrator":
+                        mentions += "\n ⚜ [{}](tg://user?id={}) `{}`".format(x.user.first_name, x.user.id, x.user.id)
+                  elif x.status == "creator":
+                        mentions += "\n 👑 [{}](tg://user?id={}) `{}`".format(x.user.first_name, x.user.id, x.user.id)
       except Exception as e:
              mentions += " " + str(e) + "\n"
       await message.reply(mentions)
