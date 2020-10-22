@@ -1,12 +1,10 @@
 import re
 import time
 from typing import List
-
-from pyrogram import (
+from pyrogram.types import (
     Message,
     InlineKeyboardButton
 )
-
 from pyrobot import (
     COMMAND_HAND_LER
 )
@@ -26,7 +24,9 @@ MATCH_MD = re.compile(r'\*(.*?)\*|'
 
 # regex to find []() links -> hyperlinks/buttons
 LINK_REGEX = re.compile(r'(?<!\\)\[.+?\]\((.*?)\)')
-BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\(buttonurl:(?:/{0,2})(.+?)(:same)?\))")
+BTN_URL_REGEX = re.compile(
+    r"(\[([^\[]+?)\]\(buttonurl:(?:/{0,2})(.+?)(:same)?\))"
+)
 
 
 def button_markdown_parser(msg: Message) -> (str, List):
@@ -82,13 +82,15 @@ def button_markdown_parser(msg: Message) -> (str, List):
 
 
 def extract_time(time_val):
-    if any(time_val.endswith(unit) for unit in ('m', 'h', 'd')):
+    if any(time_val.endswith(unit) for unit in ('s', 'm', 'h', 'd')):
         unit = time_val[-1]
         time_num = time_val[:-1]  # type: str
         if not time_num.isdigit():
             return None
 
-        if unit == 'm':
+        if unit == 's':
+            bantime = int(time.time() + int(time_num))
+        elif unit == 'm':
             bantime = int(time.time() + int(time_num) * 60)
         elif unit == 'h':
             bantime = int(time.time() + int(time_num) * 60 * 60)
@@ -102,12 +104,12 @@ def extract_time(time_val):
         return None
 
 
-def format_welcome_caption(html_string, chat_member): 
+def format_welcome_caption(html_string, chat_member):
     return html_string.format(
         dc_id=chat_member.dc_id,
         first_name=chat_member.first_name,
         id=chat_member.id,
         last_name=chat_member.last_name,
-        mention=f"{chat_member:mention}",
+        mention=chat_member.mention,
         username=chat_member.username
     )

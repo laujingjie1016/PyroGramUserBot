@@ -1,48 +1,31 @@
-from pyrogram import (
-    Client,
-    filters
-)
+import json
+from pyrogram import filters
 from pyrogram.types import (
     InlineKeyboardMarkup
 )
 from pyrobot import (
     COMMAND_HAND_LER,
-    DB_URI,
-    TG_URI
+    TG_URI,
+    TG_IRU_S_M_ID
 )
-from pyrobot.helper_functions.admin_check import admin_check
+from pyrobot.pyrobot import PyroBot
+from pyrobot.helper_functions.cust_p_filters import admin_fliter
 from pyrobot.helper_functions.msg_types import (
     get_note_type,
     Types
 )
-if DB_URI is not None:
-    import pyrobot.helper_functions.sql_helpers.welcome_sql as sql
 
 
-@Client.on_message(
-    filters.command(["savewelcome", "setwelcome"], COMMAND_HAND_LER)
+@PyroBot.on_message(
+    filters.command(["savefilter", "filter"], COMMAND_HAND_LER) &
+    admin_fliter
 )
-async def save_note(client, message):
-    is_admin = await admin_check(message)
-    if not is_admin:
-        return
+async def save_filter(client: PyroBot, message):
     status_message = await message.reply_text(
         "checking 🤔🙄🙄",
         quote=True
     )
-    if len(message.command) == 2:
-        chat_id = message.chat.id
-        note_message_id = int(message.command[1])
-        sql.add_welcome_setting(
-            chat_id,
-            False,
-            0,
-            note_message_id
-        )
-        await status_message.edit_text(
-            "welcome message saved"
-        )
-    elif (
+    if (
         message.reply_to_message and
         message.reply_to_message.reply_markup is not None
     ):
@@ -51,24 +34,34 @@ async def save_note(client, message):
             disable_notification=True
         )
         chat_id = message.chat.id
-        note_message_id = fwded_mesg.message_id
-        sql.add_welcome_setting(
-            chat_id,
-            True,
-            0,
-            note_message_id
+        filter_kw = " ".join(message.command[1:])
+        fm_id = fwded_mesg.message_id
+
+        client.filterstore[str(chat_id)][filter_kw] = fm_id
+        await client.save_public_store(
+            TG_IRU_S_M_ID,
+            json.dumps(client.filterstore)
         )
+
         await status_message.edit_text(
-            "welcome message saved"
+            f"filter <u>{filter_kw}</u> added"
+            # f"<a href='https://'>{message.chat.title}</a>"
         )
+
     else:
-        note_name, text, data_type, content, buttons = get_note_type(
+        filter_kw, text, data_type, content, buttons = get_note_type(
             message,
-            1
+            2
         )
 
         if data_type is None:
-            await status_message.edit_text("🤔 maybe welcome text is empty")
+            await status_message.edit_text("🤔 maybe note text is empty")
+            return
+
+        if not filter_kw:
+            await status_message.edit_text(
+                "എന്തിന്ന് ഉള്ള മറുപടി ആണ് എന്ന് വ്യക്തം ആക്കിയില്ല 🤔"
+            )
             return
 
         # construct message using the above parameters
@@ -100,13 +93,17 @@ async def save_note(client, message):
         # save to db 🤔
         if fwded_mesg is not None:
             chat_id = message.chat.id
-            note_message_id = fwded_mesg.message_id
-            sql.add_welcome_setting(
-                chat_id,
-                bool(note_name),
-                0,
-                note_message_id
+            fm_id = fwded_mesg.message_id
+
+            client.filterstore[str(chat_id)][filter_kw] = fm_id
+            await client.save_public_store(
+                TG_IRU_S_M_ID,
+                json.dumps(client.filterstore)
             )
+
             await status_message.edit_text(
-                "welcome message saved"
+                f"filter <u>{filter_kw}</u> added"
+                # f"<a href='https://'>{message.chat.title}</a>"
             )
+        else:
+            await status_message.edit_text("🥺 this might be an error 🤔")

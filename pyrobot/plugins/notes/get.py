@@ -1,14 +1,12 @@
 from pyrogram import (
     Client,
-    Filters
+    filters
 )
-
 from pyrobot import (
     COMMAND_HAND_LER,
     DB_URI,
     TG_URI
 )
-
 from pyrobot.helper_functions.msg_types import (
     get_file_id
 )
@@ -35,6 +33,8 @@ async def get_note_with_command(message, note_name):
         caption = note_message.caption
         if caption:
             caption = caption.html
+        if not caption:
+            caption = ""
         await n_m.reply_cached_media(
             file_id=file_id,
             caption=caption,
@@ -45,6 +45,8 @@ async def get_note_with_command(message, note_name):
         caption = note_message.text
         if caption:
             caption = caption.html
+        if not caption:
+            caption = ""
         disable_web_page_preview = True
         if "gra.ph" in caption or "youtu" in caption:
             disable_web_page_preview = False
@@ -56,13 +58,19 @@ async def get_note_with_command(message, note_name):
         )
 
 
-@Client.on_message(Filters.command(["getnote", "get"], COMMAND_HAND_LER))
+@Client.on_message(
+    filters.command(["getnote", "get"], COMMAND_HAND_LER) &
+    filters.incoming
+)
 async def get_note(_, message):
     note_name = " ".join(message.command[1:])
     await get_note_with_command(message, note_name)
 
 
-@Client.on_message(Filters.regex(pattern=r"#(\w+)"))
+@Client.on_message(
+    filters.regex(pattern=r"#(\w+)") &
+    filters.incoming
+)
 async def get_hash_tag_note(_, message):
     note_name = message.matches[0].group(1)
     await get_note_with_command(message, note_name)

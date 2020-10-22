@@ -5,21 +5,20 @@ import os
 import time
 from datetime import datetime
 
-from pyrogram import (
-    Client,
-    Filters
-)
+from pyrogram import Client, filters
 
-from pyrobot import (
-    COMMAND_HAND_LER,
-    TMP_DOWNLOAD_DIRECTORY
-)
-from pyrobot.helper_functions.check_if_thumb_exists import is_thumb_image_exists
+from pyrobot import COMMAND_HAND_LER
+from pyrobot.helper_functions.check_if_thumb_exists import \
+    is_thumb_image_exists
 from pyrobot.helper_functions.cust_p_filters import sudo_filter
-from pyrobot.helper_functions.display_progress_dl_up import progress_for_pyrogram
+from pyrobot.helper_functions.display_progress_dl_up import \
+    progress_for_pyrogram
 
 
-@Client.on_message(Filters.command("uploadasdoc", COMMAND_HAND_LER) & sudo_filter)
+@Client.on_message(
+    filters.command("uploadasdoc", COMMAND_HAND_LER) &
+    sudo_filter
+)
 async def upload_as_document(client, message):
     status_message = await message.reply_text("...")
     if " " in message.text:
@@ -49,7 +48,20 @@ async def upload_as_document(client, message):
     else:
         await status_message.edit(f"<code>{COMMAND_HAND_LER}uploadasdoc FILE_PATH</code> to upload to current Telegram chat")
 
+<< << << < HEAD
+
+
 @Client.on_message(Filters.command("uploadasvideo", COMMAND_HAND_LER) & sudo_filter)
+== == == =
+
+
+@Client.on_message(
+    filters.command("uploadasvideo", COMMAND_HAND_LER) &
+    sudo_filter
+)
+>>>>>> > 0b2cea845d7d54659561cbed1d8457ecc66471ef
+
+
 async def upload_as_video(client, message):
     status_message = await message.reply_text("...")
     if " " in message.text:
@@ -83,12 +95,25 @@ async def upload_as_video(client, message):
     else:
         await status_message.edit(f"<code>{COMMAND_HAND_LER}uploadasvideo FILE_PATH</code> to upload to current Telegram chat")
 
+<< << << < HEAD
+
+
 @Client.on_message(Filters.command("uploadasphoto", COMMAND_HAND_LER) & sudo_filter)
+== == == =
+
+
+@Client.on_message(
+    filters.command("uploadasphoto", COMMAND_HAND_LER) &
+    sudo_filter
+)
+>>>>>> > 0b2cea845d7d54659561cbed1d8457ecc66471ef
+
+
 async def upload_as_photo(client, message):
     status_message = await message.reply_text("...")
     if " " in message.text:
-        recvd_command, local_file_name = message.text.split(" ", 1)
-        thumb_image_path = await is_thumb_image_exists(local_file_name)
+        _, local_file_name = message.text.split(" ", 1)
+        # thumb_image_path = await is_thumb_image_exists(local_file_name)
         if os.path.exists(local_file_name):
             start_t = datetime.now()
             c_time = time.time()
@@ -111,4 +136,6 @@ async def upload_as_photo(client, message):
         else:
             await status_message.edit("404: media not found")
     else:
-        await status_message.edit(f"<code>{COMMAND_HAND_LER}uploadasphoto FILE_PATH</code> to upload to current Telegram chat")
+        await status_message.edit(
+            f"<code>{COMMAND_HAND_LER}uploadasphoto FILE_PATH</code> to upload to current Telegram chat"
+        )

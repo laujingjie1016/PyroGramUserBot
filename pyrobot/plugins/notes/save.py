@@ -1,16 +1,16 @@
 from pyrogram import (
     Client,
-    Filters,
+    filters
+)
+from pyrogram.types import (
     InlineKeyboardMarkup
 )
-
 from pyrobot import (
     COMMAND_HAND_LER,
     DB_URI,
     TG_URI
 )
-
-from pyrobot.helper_functions.admin_check import admin_check
+from pyrobot.helper_functions.cust_p_filters import admin_fliter
 from pyrobot.helper_functions.msg_types import (
     get_note_type,
     Types
@@ -19,16 +19,19 @@ if DB_URI is not None:
     import pyrobot.helper_functions.sql_helpers.notes_sql as sql
 
 
-@Client.on_message(Filters.command(["savenote", "save"], COMMAND_HAND_LER))
+@Client.on_message(
+    filters.command(["savenote", "save"], COMMAND_HAND_LER) &
+    admin_fliter
+)
 async def save_note(client, message):
-    is_admin = await admin_check(message)
-    if not is_admin:
-        return
     status_message = await message.reply_text(
         "checking 🤔🙄🙄",
         quote=True
     )
-    if message.reply_to_message and message.reply_to_message.reply_markup is not None:
+    if (
+        message.reply_to_message and
+        message.reply_to_message.reply_markup is not None
+    ):
         fwded_mesg = await message.reply_to_message.forward(
             chat_id=TG_URI,
             disable_notification=True
@@ -46,14 +49,19 @@ async def save_note(client, message):
             # f"<a href='https://'>{message.chat.title}</a>"
         )
     else:
-        note_name, text, data_type, content, buttons = get_note_type(message, 2)
+        note_name, text, data_type, content, buttons = get_note_type(
+            message,
+            2
+        )
 
         if data_type is None:
             await status_message.edit_text("🤔 maybe note text is empty")
             return
 
         if not note_name:
-            await status_message.edit_text("എന്തിന്ന് ഉള്ള മറുപടി ആണ് എന്ന് വ്യക്തം ആക്കിയില്ല 🤔")
+            await status_message.edit_text(
+                "എന്തിന്ന് ഉള്ള മറുപടി ആണ് എന്ന് വ്യക്തം ആക്കിയില്ല 🤔"
+            )
             return
 
         # construct message using the above parameters

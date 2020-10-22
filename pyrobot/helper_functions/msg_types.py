@@ -1,7 +1,5 @@
 from enum import IntEnum, unique
-
-from pyrogram import Message
-
+from pyrogram.types import Message
 from pyrobot.helper_functions.string_handling import button_markdown_parser
 
 
@@ -25,7 +23,7 @@ def get_note_type(msg: Message, split: int):
     raw_text = msg.text or msg.caption
     args = raw_text.split(None, split)
     # use python's maxsplit to separate cmd and args
-    note_name = args[1]
+    note_name = msg.command[1]
 
     buttons = []
     # determine what the contents of the filter are - text, image, sticker, etc
@@ -37,7 +35,8 @@ def get_note_type(msg: Message, split: int):
             data_type = Types.TEXT
 
     elif msg.reply_to_message:
-        if len(args) >= split and msg.reply_to_message.text:  # not caption, text
+        if len(args) >= split and msg.reply_to_message.text:
+            # not caption, text
             text, buttons = button_markdown_parser(msg.reply_to_message)
             if buttons:
                 data_type = Types.BUTTON_TEXT
@@ -102,20 +101,21 @@ def get_file_id(msg: Message):
         elif msg.photo:
             content = msg.photo.file_id
             data_type = Types.PHOTO
-            
+
         elif msg.audio:
             content = msg.audio.file_id
             data_type = Types.AUDIO
-            
+
         elif msg.voice:
             content = msg.voice.file_id
             data_type = Types.VOICE
-            
+
         elif msg.video:
             content = msg.video.file_id
             data_type = Types.VIDEO
-            
+
         elif msg.video_note:
             content = msg.video_note.file_id
             data_type = Types.VIDEO_NOTE
+
     return data_type, content

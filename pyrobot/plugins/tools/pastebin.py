@@ -1,7 +1,8 @@
 # Copyright (C) 2020 by SpEcHiDe@Github, < https://github.com/SpEcHiDe >.
 #
 # This file is part of < https://github.com/SpEcHiDe/PyroGramBot > project,
-# and is released under the "GNU Affero General Public License v3.0 License Agreement".
+# and is released under the
+# "GNU Affero General Public License v3.0 License Agreement".
 # Please see < https://github.com/SpEcHiDe/PyroGramBot/raw/master/COPYING >
 #
 """IX.IO pastebin like site
@@ -11,16 +12,14 @@ import aiohttp
 import json
 import os
 from urllib.parse import urlparse
-
-from pyrogram import Client, Filters
-
+from pyrogram import Client, filters
 from pyrobot import (
     COMMAND_HAND_LER,
     TMP_DOWNLOAD_DIRECTORY
 )
 
 
-@Client.on_message(Filters.command("paste", COMMAND_HAND_LER))
+@Client.on_message(filters.command("paste", COMMAND_HAND_LER))
 async def paste_bin(_, message):
     status_message = await message.reply_text("...")
     downloaded_file_name = None
@@ -36,7 +35,6 @@ async def paste_bin(_, message):
         downloaded_file_name = ""
         for m in m_list:
             downloaded_file_name += m.decode("UTF-8")
-            downloaded_file_name += "\n"
         os.remove(downloaded_file_name_res)
     elif message.reply_to_message:
         downloaded_file_name = message.reply_to_message.text.html
@@ -45,7 +43,7 @@ async def paste_bin(_, message):
     else:
         await status_message.edit("എന്ത് ചെയ്യണം എന്ന് പറഞ്ഞില്ല")
         return
-    
+
     if downloaded_file_name is None:
         await status_message.edit("എന്ത് ചെയ്യണം എന്ന് പറഞ്ഞില്ല")
         return
@@ -63,28 +61,33 @@ async def paste_bin(_, message):
     chosen_store = "nekobin"
     if len(message.command) == 2:
         chosen_store = message.command[1]
-    
+
     # get the required pastebin URI
-    paste_store_url = paste_bin_store_s.get(chosen_store, paste_bin_store_s["nekobin"])
+    paste_store_url = paste_bin_store_s.get(
+        chosen_store,
+        paste_bin_store_s["nekobin"]
+    )
     paste_store_base_url_rp = urlparse(paste_store_url)
 
     # the pastebin sites, respond with only the "key"
     # we need to prepend the BASE_URL of the appropriate site
     paste_store_base_url = paste_store_base_url_rp.scheme + "://" + \
         paste_store_base_url_rp.netloc
-    
+
     async with aiohttp.ClientSession() as session:
         response_d = await session.post(paste_store_url, json=json_paste_data)
         response_jn = await response_d.json()
-    
+
     # we got the response from a specific site,
     # this dictionary needs to be scrapped
     # using bleck megick to find the "key"
     t_w_attempt = bleck_megick(response_jn)
-    required_url = json.dumps(t_w_attempt, sort_keys=True, indent=4) + "\n\n #ERROR"
+    required_url = json.dumps(
+        t_w_attempt, sort_keys=True, indent=4
+    ) + "\n\n #ERROR"
     if t_w_attempt is not None:
         required_url = paste_store_base_url + "/" + "raw" + "/" + t_w_attempt
-    
+
     await status_message.edit(required_url)
 
 

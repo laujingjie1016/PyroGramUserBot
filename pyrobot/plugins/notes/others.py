@@ -1,25 +1,22 @@
 from pyrogram import (
     Client,
-    Filters
+    filters
 )
-
 from pyrobot import (
     COMMAND_HAND_LER,
     DB_URI,
     MAX_MESSAGE_LENGTH
 )
-
-from pyrobot.helper_functions.admin_check import admin_check
-
+from pyrobot.helper_functions.cust_p_filters import admin_fliter
 if DB_URI is not None:
     import pyrobot.helper_functions.sql_helpers.notes_sql as sql
 
 
-@Client.on_message(Filters.command(["clearnote", "clear"], COMMAND_HAND_LER))
+@Client.on_message(
+    filters.command(["clearnote", "clear"], COMMAND_HAND_LER) &
+    admin_fliter
+)
 async def clear_note(_, message):
-    is_admin = await admin_check(message)
-    if not is_admin:
-        return
     status_message = await message.reply_text(
         "checking 🤔🙄🙄",
         quote=True
@@ -31,7 +28,9 @@ async def clear_note(_, message):
     )
 
 
-@Client.on_message(Filters.command(["listnotes", "notes"], COMMAND_HAND_LER))
+@Client.on_message(
+    filters.command(["listnotes", "notes"], COMMAND_HAND_LER)
+)
 async def list_note(_, message):
     status_message = await message.reply_text(
         "checking 🤔🙄🙄",
@@ -44,7 +43,7 @@ async def list_note(_, message):
     msg_p = msg
 
     for note in note_list:
-        note_name = " - {}\n".format(note.name)
+        note_name = " - #{}\n".format(note.name)
         if len(msg) + len(note_name) > MAX_MESSAGE_LENGTH:
             await message.reply_text(msg)
             msg = ""

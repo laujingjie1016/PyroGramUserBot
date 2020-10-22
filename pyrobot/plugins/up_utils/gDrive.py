@@ -1,27 +1,21 @@
 """Google Drive Plugins
 Syntax: .gdrive"""
 import math
-import httplib2
 import os
 import time
+from mimetypes import guess_type
 
+import httplib2
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
-from mimetypes import guess_type
 from oauth2client.client import OAuth2WebServerFlow
-from pyrogram import Client, Filters
+from pyrogram import Client, filters
 
-from pyrobot import (
-    COMMAND_HAND_LER,
-    DB_URI,
-    G_DRIVE_CLIENT_ID,
-    G_DRIVE_CLIENT_SECRET,
-    LOGGER,
-    TMP_DOWNLOAD_DIRECTORY
-)
-
-from pyrobot.helper_functions.display_progress_dl_up import progress_for_pyrogram
+from pyrobot import (COMMAND_HAND_LER, DB_URI, G_DRIVE_CLIENT_ID,
+                     G_DRIVE_CLIENT_SECRET, LOGGER, TMP_DOWNLOAD_DIRECTORY)
 from pyrobot.helper_functions.cust_p_filters import sudo_filter
+from pyrobot.helper_functions.display_progress_dl_up import \
+    progress_for_pyrogram
 
 if DB_URI is not None:
     import pyrobot.helper_functions.sql_helpers.gDrive_sql as sql
@@ -36,9 +30,22 @@ G_DRIVE_DIR_MIME_TYPE = "application/vnd.google-apps.folder"
 flow = None
 
 
+<< << << < HEAD
+
+
 @Client.on_message(Filters.command("gdrive", COMMAND_HAND_LER) & sudo_filter)
+== == == =
+
+
+@Client.on_message(
+    filters.command("gdrive", COMMAND_HAND_LER) &
+    sudo_filter
+)
+>>>>>> > 0b2cea845d7d54659561cbed1d8457ecc66471ef
+
+
 async def g_drive_commands(client, message):
-    status_message = await message.reply_text("...")
+    status_message = await message.reply_text("...", quote=True)
     if len(message.command) > 1:
         current_recvd_command = message.command[1]
         if current_recvd_command == "setup":

@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 # (c) Shrimadhav U K
 
+# the logging things
+import logging
 # needed to appropriately, select ENV vars / Config vars
 import os
 
-# the logging things
-import logging
 logging.basicConfig(
     level=logging.DEBUG,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -25,7 +25,6 @@ else:
 LOGGER = logging.getLogger(__name__)
 APP_ID = Config.APP_ID
 API_HASH = Config.API_HASH
-HU_STRING_SESSION = Config.HU_STRING_SESSION
 TG_COMPANION_BOT = Config.TG_COMPANION_BOT
 COMMAND_HAND_LER = Config.COMMAND_HAND_LER
 MAX_MESSAGE_LENGTH = Config.MAX_MESSAGE_LENGTH
@@ -39,15 +38,19 @@ DB_URI = Config.DB_URI
 TG_URI = int(Config.TG_URI)
 G_DRIVE_CLIENT_ID = Config.G_DRIVE_CLIENT_ID
 G_DRIVE_CLIENT_SECRET = Config.G_DRIVE_CLIENT_SECRET
-LOGGER = Config.LOGGER
-LOGGER_GROUP = Config.LOGGER_GROUP
-PRIVATE_CHANNEL_BOT_API_ID = Config.PRIVATE_CHANNEL_BOT_API_ID
-SPAMWATCH_API = Config.SPAMWATCH_API
-PM_LOGGR_BOT_API_ID = Config.PM_LOGGR_BOT_API_ID
-LOG_PM_ACTIVE = Config.LOG_PM_ACTIVE
-IS_BOT = False
+IS_BOT = True
+USE_AS_BOT = True
 OWNER_ID = Config.OWNER_ID
 SUDO_USERS = list(Config.SUDO_USERS)
-SUDO_USERS.append(7351948)
+SUDO_USERS.append(OWNER_ID)
 SUDO_USERS = list(set(SUDO_USERS))
-TG_MAX_SELECT_LEN = Config.TG_MAX_SELECT_LEN
+TG_MAX_SELECT_LEN = int(Config.TG_MAX_SELECT_LEN)
+TG_IRU_S_M_ID = int(Config.TG_IRU_S_M_ID)
+WARN_DATA_ID = int(Config.WARN_DATA_ID)
+WARN_SETTINGS_ID = int(Config.WARN_SETTINGS_ID)
+# define the "types" that should be uplaoded as streamable
+# copied from SpEcHiDe/UniBorg
+TL_VID_STREAM_TYPES = ("MP4", "WEBM", "MKV")
+TL_MUS_STREAM_TYPES = ("MP3", "WAV", "FLAC")
+TL_FF_NOAQ_TYPES = ("WEBP")
+A_PIN_MESSAGE_ID = int(Config.A_PIN_MESSAGE_ID)

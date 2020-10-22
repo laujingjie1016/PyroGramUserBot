@@ -1,6 +1,6 @@
 {
-  "name": "PyroGramUserBot",
-  "description": "PyroGram UserBot. Powered by @UserBotTalk",
+  "name": "PyroGramBot",
+  "description": "PyroGram Telegram User / Bot. Powered by @UserBotTalk",
   "keywords": [
     "telegram",
     "best",
@@ -12,55 +12,32 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/SpEcHiDe/PyroGramUserBot",
+  "repository": "https://github.com/SpEcHiDe/PyroGramBot",
   "success_url": "https://telegram.dog/UserBotTalk",
-  "website": "https://github.com/SpEcHiDe/PyroGramUserBot",
+  "website": "https://github.com/SpEcHiDe/PyroGramBot",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable webhooks when in env mode",
       "value": "ANYTHING"
     },
     "APP_ID": {
-      "description": "Get this value from https://my.telegram.org",
-      "value": ""
+      "description": "Get this value from https://my.telegram.org"
     },
     "API_HASH": {
-      "description": "Get this value from https://my.telegram.org",
-      "value": ""
+      "description": "Get this value from https://my.telegram.org"
     },
-    "HU_STRING_SESSION": {
-      "description": "Generate this value by running python3 GenerateStringSession.py locally",
-      "value": ""
+    "TG_BOT_TOKEN_BF_HER": {
+      "description": "Get this value from @BotFather"
     },
     "COMMAND_HAND_LER": {
       "description": "specify command handler that should be used for the plugins",
-      "required": false
-    },
-    "TMP_DOWNLOAD_DIRECTORY": {
-      "description": "This is required for the plugins involving the file system.",
-      "required": false
-    },
-    "HEROKU_API_KEY": {
-      "description": "get a Heroku API key from http://dashboard.heroku.com/account",
-      "required": false
-    },
-    "OFFICIAL_UPSTREAM_REPO": {
-      "description": "set this to your fork link on GitHub, not setting anything is RECOMMENDED, nevertheless, keeping this in the hope that it 'might' be useful",
-      "required": false
-    },
-    "G_DRIVE_CLIENT_ID": {
-      "description": "Get your credentials from https://da.gd/so63O",
-      "required": false
-    },
-    "G_DRIVE_CLIENT_SECRET": {
-      "description": "Get your credentials from https://da.gd/so63O",
       "required": false
     }
   },
   "addons": [{
     "plan": "heroku-postgresql",
     "options": {
-      "version": "9.5"
+      "version": "12"
     }
   }],
   "buildpacks": [{
