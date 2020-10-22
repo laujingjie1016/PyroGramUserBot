@@ -20,14 +20,13 @@ async def set_name(client, message):
 @Client.on_message(Filters.command(['pbio'], COMMAND_HAND_LER) & Filters.me)
 async def set_bio(client, message):
       if sleeptime < time.time():
-         bio = ' '.join(message.command[1:])
-         if len(bio) > 70:
-            await  message.edit('`Bio too long maximum 70 characters`')
-            time.sleep(3)
-            await message.delete()
-         else:
-            await  client.send(functions.account.UpdateProfile(about=bio))
-            await  message.edit('`Bio succesfully changed`'.format(bio))
+            bio = ' '.join(message.command[1:])
+            if len(bio) > 70:
+                  await  message.edit('`Bio too long maximum 70 characters`')
+            else:
+                  await  client.send(functions.account.UpdateProfile(about=bio))
+                  await  message.edit('`Bio succesfully changed`'.format(bio))
+
             time.sleep(3)
             await message.delete()
 

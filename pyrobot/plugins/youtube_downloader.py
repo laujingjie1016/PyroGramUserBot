@@ -92,7 +92,7 @@ def time_formatter(milliseconds: int) -> str:
 
 @Client.on_message(Filters.command("yta", COMMAND_HAND_LER)  & Filters.me )
 async def ytdl_(client: Client, message):
-    
+
     """ For .ytdl command, download media from YouTube and many other sites. """
     url = message.command[1]
     type = message.command[1]
@@ -157,8 +157,8 @@ async def ytdl_(client: Client, message):
     except Exception as e:
         await message.edit_text(f"{str(type(e)): {str(e)}}")
         return
-    c_time = time.time()
     if song:
+        c_time = time.time()
         thumb = f"{out_folder + ytdl_data['id']}.mp3"[:(len(f"{out_folder + ytdl_data['id']}.mp3")-4)] + ".jpg"
         file_path = f"{out_folder + ytdl_data['id']}.mp3"
         song_size = file_size(file_path)
@@ -248,8 +248,8 @@ async def ytdl_vid(client: Client, message):
     except Exception as e:
         await message.edit_text(f"{str(type(e)): {str(e)}}")
         return
-    c_time = time.time()
     if video:
+        c_time = time.time()
         for single_file in filename:
             file_path = f"{out_folder + ytdl_data['id']}.mp4"
             video_size = file_size(file_path)

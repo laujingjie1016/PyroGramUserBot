@@ -14,10 +14,9 @@ async def for_ward(client, message):
          time.sleep(5)
          await message.delete()
       if message.reply_to_message:
-         await message.reply_to_message.forward(chat_id=FORWARD_TARGET)
-         time.sleep(5)
-         await message.delete()
+            await message.reply_to_message.forward(chat_id=FORWARD_TARGET)
       else:
-         await message.edit("You have to reply to a document for Forward")
-         time.sleep(5)
-         await message.delete()
+            await message.edit("You have to reply to a document for Forward")
+
+      time.sleep(5)
+      await message.delete()

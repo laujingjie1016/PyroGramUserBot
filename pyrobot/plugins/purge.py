@@ -37,10 +37,7 @@ async def purge(client, message):
                 )
                 purged_messages_count += len(list_of_messages_to_delete)
                 list_of_messages_to_delete = []
-            if from_user is not None:
-                if a_message.from_user == from_user:
-                    list_of_messages_to_delete.append(a_message.message_id)
-            else:
+            if a_message.from_user == from_user or from_user is None:
                 list_of_messages_to_delete.append(a_message.message_id)
         # print(list_of_messages_to_delete)
         await client.delete_messages(
