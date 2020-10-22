@@ -1,6 +1,8 @@
 import os
 
 
+
+
 class Config:
     LOGGER = True
     # The Telegram API things
@@ -37,7 +39,7 @@ class Config:
     # SuDo User
     OWNER_ID = int(os.environ.get("OWNER_ID", "7351948"))
     # Array to store users who are authorized to use the bot
-    SUDO_USERS = set(int(x) for x in os.environ.get("SUDO_USERS", "").split())
+    SUDO_USERS = {int(x) for x in os.environ.get("SUDO_USERS", "").split()}
     # the maximum number of 'selectable' messages in Telegram
     TG_MAX_SELECT_LEN = 100
     # for bakanup purposes
@@ -46,6 +48,7 @@ class Config:
     WARN_SETTINGS_ID = int(os.environ.get("WARN_SETTINGS_ID", "0"))
     # message_id for the Pinned Message
     A_PIN_MESSAGE_ID = int(os.environ.get("A_PIN_MESSAGE_ID", "3"))
+
 
 
 class Production(Config):
