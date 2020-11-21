@@ -8,7 +8,7 @@ from pyrogram import Client, Filters
 from pyrobot import COMMAND_HAND_LER
 
 
-@Client.on_message(Filters.command("whois", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("whois", COMMAND_HAND_LER) & Filters.me)
 async def who_is(client, message):
     from_user = None
     if " " in message.text:

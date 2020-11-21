@@ -14,12 +14,11 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-
 @Client.on_message(Filters.command(["count"], COMMAND_HAND_LER) & Filters.me)
 async def count_(client: Client, message):
     """Command to get stats about the account"""
     waiting_message = await message.edit('`Collecting stats, please wait..`')
-    
+
     channel = []
     channel_unread_msg = []
     channel_unread_mention = []
@@ -94,18 +93,18 @@ async def count_(client: Client, message):
     # response += f'**Unread Message:** {len(bot_unread_msg) + len(channel_unread_msg) + len(group_unread_msg) + len(private_unread_msg) + len(super_group_unread_msg) + len(user_unread_msg)} \n'
     # response += f'**Unread Mentions:** {len(bot_unread_mention) + len(channel_unread_mention) + len(group_unread_mention) + len(private_unread_mention) + len(super_group_unread_mention) + len(user_unread_mention)} \n\n'
     await message.edit(response)
-    del channel 
-    del channel_unread_msg 
-    del channel_unread_mention 
-    del channel_creator 
-    del channel_admin 
-    del group 
-    del group_unread_msg 
-    del group_unread_mention 
-    del group_creator 
-    del group_admin 
-    del super_group 
-    del super_group_unread_msg 
+    del channel
+    del channel_unread_msg
+    del channel_unread_mention
+    del channel_creator
+    del channel_admin
+    del group
+    del group_unread_msg
+    del group_unread_mention
+    del group_creator
+    del group_admin
+    del super_group
+    del super_group_unread_msg
     del super_group_unread_mention
     del super_group_creator
     del super_group_admin
@@ -118,4 +117,3 @@ async def count_(client: Client, message):
     del private
     del private_unread_msg
     del private_unread_mention
-    

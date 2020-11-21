@@ -10,6 +10,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
+
 @Client.on_message(Filters.command(["spamadmin"], COMMAND_HAND_LER) & Filters.me)
 async def spam_spot(client, message):
     if message.forward_from:
@@ -20,6 +21,6 @@ async def spam_spot(client, message):
         mentions += f"[\u2063](tg://user?id={x.user.id})"
     reply_message = None
     if message.reply_to_message:
-        reply_message = await client.get_messages(message.chat.id,message.reply_to_message.message_id)
+        reply_message = await client.get_messages(message.chat.id, message.reply_to_message.message_id)
     await message.reply(mentions)
     await message.delete()

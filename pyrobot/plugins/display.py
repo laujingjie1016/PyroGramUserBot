@@ -21,7 +21,8 @@ async def progress_for_pyrogram(client, current, total, message, start, type_of_
             humanbytes(speed),
             time_formatter(estimated_total_time)
         )
-        await message.edit("{}\n\n{}".format(type_of_ps,tmp))
+        await message.edit("{}\n\n{}".format(type_of_ps, tmp))
+
 
 def humanbytes(size):
     if not size:
@@ -39,6 +40,7 @@ def humanbytes(size):
         size /= power
         raised_to_pow += 1
     return str(round(size, 2)) + " " + dict_power_n[raised_to_pow]
+
 
 def time_formatter(milliseconds: int) -> str:
     seconds, milliseconds = divmod(int(milliseconds), 1000)

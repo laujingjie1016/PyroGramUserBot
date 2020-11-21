@@ -11,10 +11,10 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@Client.on_message(Filters.command("wikipedia", COMMAND_HAND_LER)  & Filters.me )
+@Client.on_message(Filters.command("wikipedia", COMMAND_HAND_LER) & Filters.me)
 async def ytdl_(client: Client, message):
-    
-    x =await message.edit_text("Processing ...")
+
+    x = await message.edit_text("Processing ...")
     input_str = message.command[1:]
     print(input_str)
     result = ""
@@ -26,7 +26,8 @@ async def ytdl_(client: Client, message):
         result += f"> [{s}]({url}) \n"
     await client.send_message(
         chat_id=message.chat.id,
-        text="WikiPedia **Search**: {} \n\n **Result**: \n\n{}".format(input_str, result),
+        text="WikiPedia **Search**: {} \n\n **Result**: \n\n{}".format(
+            input_str, result),
         disable_web_page_preview=True
     )
     await x.delete()

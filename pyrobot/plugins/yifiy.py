@@ -16,7 +16,8 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@Client.on_message(Filters.command("yify", COMMAND_HAND_LER)  & Filters.me )
+
+@Client.on_message(Filters.command("yify", COMMAND_HAND_LER) & Filters.me)
 async def ytdl_(client: Client, message):
     await message.edit_text("Gettin yify recent movies. Check @uploadbot")
     uploadbot = "@uploadbot"
@@ -30,7 +31,8 @@ async def ytdl_(client: Client, message):
         movie_links = movie_links[1:]
         for torrent_link in movie_links:
             href_link = BASE_URL + torrent_link.get("href")
-            magnetic_link_response = requests.get(href_link, allow_redirects=False)
+            magnetic_link_response = requests.get(
+                href_link, allow_redirects=False)
             magnetic_link = magnetic_link_response.headers.get("Location")
             await client.send_message(
                 chat_id=uploadbot,

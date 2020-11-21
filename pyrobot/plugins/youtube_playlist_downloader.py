@@ -33,6 +33,7 @@ logger = logging.getLogger(__name__)
 
 DELETE_TIMEOUT = 5
 
+
 async def progress(current, total, message, start, type_of_ps, file_name=None):
     """Generic progress_callback for uploads and downloads."""
     now = time.time()
@@ -90,7 +91,8 @@ def time_formatter(milliseconds: int) -> str:
         ((str(milliseconds) + " millisecond(s), ") if milliseconds else "")
     return tmp[:-2]
 
-@Client.on_message(Filters.command("playlista", COMMAND_HAND_LER)  & Filters.me )
+
+@Client.on_message(Filters.command("playlista", COMMAND_HAND_LER) & Filters.me)
 async def ytdl_(client: Client, message):
     url = message.command[1]
     type = message.command[1]
@@ -100,25 +102,25 @@ async def ytdl_(client: Client, message):
         os.makedirs(out_folder)
     await message.edit_text("`Preparing to download...`")
 
-    if type :
+    if type:
         opts = {
-            'format':'bestaudio',
-            'addmetadata':True,
+            'format': 'bestaudio',
+            'addmetadata': True,
             'noplaylist': False,
-            'key':'FFmpegMetadata',
-            'writethumbnail':True,
-            'embedthumbnail':True,
-            'prefer_ffmpeg':True,
-            'geo_bypass':True,
-            'nocheckcertificate':True,
+            'key': 'FFmpegMetadata',
+            'writethumbnail': True,
+            'embedthumbnail': True,
+            'prefer_ffmpeg': True,
+            'geo_bypass': True,
+            'nocheckcertificate': True,
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
                 'preferredquality': '320',
             }],
-            'outtmpl':out_folder + '%(title)s.%(ext)s',
-            'quiet':True,
-            'logtostderr':False
+            'outtmpl': out_folder + '%(title)s.%(ext)s',
+            'quiet': True,
+            'logtostderr': False
         }
         video = False
         song = True
@@ -158,7 +160,8 @@ async def ytdl_(client: Client, message):
         return
     if song:
         c_time = time.time()
-        thumb = f"{out_folder + ytdl_data['id']}.mp3"[:(len(f"{out_folder + ytdl_data['id']}.mp3")-4)] + ".jpg"
+        thumb = f"{out_folder + ytdl_data['id']}.mp3"[
+            :(len(f"{out_folder + ytdl_data['id']}.mp3")-4)] + ".jpg"
         file_path = f"{out_folder + ytdl_data['id']}.mp3"
         song_size = file_size(file_path)
         await message.edit_text(f"`Preparing to upload song:`\
@@ -170,18 +173,17 @@ async def ytdl_(client: Client, message):
             caption=ytdl_data['title'] + "\n" + f"`{song_size}`",
             supports_streaming=True,
             progress=progress_for_pyrogram,
-                progress_args=(
-                    "trying to upload", message, c_time
-                )
+            progress_args=(
+                "trying to upload", message, c_time
+            )
         )
         os.remove(f"{out_folder + ytdl_data['id']}.mp3")
         await asyncio.sleep(2)
         await message.delete()
         shutil.rmtree(out_folder)
-    
-    
-        
-@Client.on_message(Filters.command("ytv", COMMAND_HAND_LER)  & Filters.me )
+
+
+@Client.on_message(Filters.command("ytv", COMMAND_HAND_LER) & Filters.me)
 async def ytdl_vid(client: Client, message):
     """ For .ytdl command, download media from YouTube and many other sites. """
     url = message.command[1]
@@ -191,27 +193,27 @@ async def ytdl_vid(client: Client, message):
     if not os.path.isdir(out_folder):
         os.makedirs(out_folder)
     await message.edit_text("`Preparing to download...`")
-    if type :
+    if type:
         opts = {
-            'format':'best',
+            'format': 'best',
             'addmetadata': True,
             'noplaylist': False,
-            'getthumbnail':True,
+            'getthumbnail': True,
             'embedthumbnail': True,
-            'xattrs':True,
+            'xattrs': True,
             'writethumbnail': True,
-            'key':'FFmpegMetadata',
-            'prefer_ffmpeg':True,
-            'geo_bypass':True,
-            'nocheckcertificate':True,
-            'postprocessors': 
+            'key': 'FFmpegMetadata',
+            'prefer_ffmpeg': True,
+            'geo_bypass': True,
+            'nocheckcertificate': True,
+            'postprocessors':
             [{
                 'key': 'FFmpegVideoConvertor',
-                'preferedformat': 'mp4'},               
-            ],
-            'outtmpl':out_folder + '%(title)s.%(ext)s',
-            'logtostderr':False,
-            'quiet':True
+                'preferedformat': 'mp4'},
+             ],
+            'outtmpl': out_folder + '%(title)s.%(ext)s',
+            'logtostderr': False,
+            'quiet': True
         }
         song = False
         video = True
@@ -272,7 +274,6 @@ async def ytdl_vid(client: Client, message):
         shutil.rmtree(out_folder)
 
 
-
 def get_lst_of_files(input_directory, output_lst):
     filesinfolder = os.listdir(input_directory)
     for file_name in filesinfolder:
@@ -281,6 +282,7 @@ def get_lst_of_files(input_directory, output_lst):
             return get_lst_of_files(current_file_name, output_lst)
         output_lst.append(current_file_name)
     return output_lst
+
 
 def convert_bytes(num):
     """

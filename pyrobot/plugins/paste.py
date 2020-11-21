@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 DOGBIN_URL = "https://del.dog/"
 NEKOBIN_URL = "https://nekobin.com/"
 
+
 @Client.on_message(Filters.command(["paste"], COMMAND_HAND_LER) & Filters.me)
 async def count_(client: Client, message):
     """pastes the text directly to dogbin"""
@@ -43,18 +44,20 @@ async def count_(client: Client, message):
                 os.remove(downloaded_file_name)
             else:
                 message = previous_message.message_id
-                message = await client.get_messages(message.chat.id,previous_message.message_id)
+                message = await client.get_messages(message.chat.id, previous_message.message_id)
         if downloaded_file_name.endswith(".py"):
             # else:
             #     message = "SYNTAX: `.paste <long text to include>`"
-            py_file =  ""
+            py_file = ""
             py_file += ".py"
             data = message
-            key = requests.post('https://nekobin.com/api/documents', json={"content": data}).json().get('result').get('key')
+            key = requests.post('https://nekobin.com/api/documents',
+                                json={"content": data}).json().get('result').get('key')
             url = f'https://nekobin.com/{key}{py_file}'
         else:
             data = message
-            key = requests.post('https://nekobin.com/api/documents', json={"content": data}).json().get('result').get('key')
+            key = requests.post('https://nekobin.com/api/documents',
+                                json={"content": data}).json().get('result').get('key')
             url = f'https://nekobin.com/{key}'
 
         reply_text = f'Nekofied to *Nekobin* : {url}'

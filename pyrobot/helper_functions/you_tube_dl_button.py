@@ -26,7 +26,8 @@ async def youtube_dl_call_back(bot, update, cb_data):
     current_touched_user_id = update.from_user.id
     if current_user_id != current_touched_user_id:
         return False, None
-    user_working_dir = os.path.join(TMP_DOWNLOAD_DIRECTORY, str(current_user_id))
+    user_working_dir = os.path.join(
+        TMP_DOWNLOAD_DIRECTORY, str(current_user_id))
     # create download directory, if not exist
     if not os.path.isdir(user_working_dir):
         await bot.delete_messages(
@@ -81,7 +82,8 @@ async def youtube_dl_call_back(bot, update, cb_data):
     if not os.path.isdir(tmp_directory_for_each_user):
         os.makedirs(tmp_directory_for_each_user)
     download_directory = tmp_directory_for_each_user
-    download_directory = os.path.join(tmp_directory_for_each_user, custom_file_name)
+    download_directory = os.path.join(
+        tmp_directory_for_each_user, custom_file_name)
     command_to_exec = []
     if tg_send_type == "audio":
         command_to_exec = [
@@ -153,7 +155,8 @@ async def youtube_dl_call_back(bot, update, cb_data):
         LOGGER.info(dir_contents)
         #
         for single_file in dir_contents:
-            local_file_name = os.path.join(tmp_directory_for_each_user, single_file)
+            local_file_name = os.path.join(
+                tmp_directory_for_each_user, single_file)
             thumb = await is_thumb_image_exists(local_file_name)
             # caption_str = os.path.basename(local_file_name)
             metadata = extractMetadata(createParser(local_file_name))

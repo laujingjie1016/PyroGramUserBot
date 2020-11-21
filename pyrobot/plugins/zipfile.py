@@ -18,7 +18,8 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@Client.on_message(Filters.command("zip", COMMAND_HAND_LER)  & Filters.me )
+
+@Client.on_message(Filters.command("zip", COMMAND_HAND_LER) & Filters.me)
 async def ytdl_(client: Client, message):
     input_str = message.command[1]
     mone = await message.edit_text("Processing ...")
@@ -33,12 +34,13 @@ async def ytdl_(client: Client, message):
                 file_name=TMP_DOWNLOAD_DIRECTORY,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                "trying to download", message, c_time
+                    "trying to download", message, c_time
                 )
             )
             directory_name = downloaded_file_name
             await message.edit_text("Finish downloading to my local")
-            zipfile.ZipFile(directory_name + '.zip', 'w', zipfile.ZIP_DEFLATED).write(directory_name)
+            zipfile.ZipFile(directory_name + '.zip', 'w',
+                            zipfile.ZIP_DEFLATED).write(directory_name)
             await client.send_document(
                 chat_id=message.chat.id,
                 document=directory_name + ".zip",
@@ -55,7 +57,7 @@ async def ytdl_(client: Client, message):
                 os.remove(directory_name + ".zip")
                 os.remove(directory_name)
             except:
-                    pass
+                pass
             await message.edit_text("Task Completed")
             await asyncio.sleep(3)
             await message.delete()
@@ -63,5 +65,6 @@ async def ytdl_(client: Client, message):
             await mone.edit(str(e))
     elif input_str:
         directory_name = input_str
-        zipfile.ZipFile(directory_name + '.zip', 'w', zipfile.ZIP_DEFLATED).write(directory_name)
+        zipfile.ZipFile(directory_name + '.zip', 'w',
+                        zipfile.ZIP_DEFLATED).write(directory_name)
         await message.edit_text("Local file compressed to `{}`".format(directory_name + ".zip"))

@@ -17,45 +17,46 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@Client.on_message(Filters.command("pbio", COMMAND_HAND_LER)  & Filters.me)
+
+@Client.on_message(Filters.command("pbio", COMMAND_HAND_LER) & Filters.me)
 async def test(client, message):
     bio = message.command[1]
     try:
         await client.send(functions.account.UpdateProfile(about=bio))
         await message.edit("Succesfully changed my profile bio")
-    except Exception as e: 
+    except Exception as e:
         await message.edit(str(e))
 
 
-@Client.on_message(Filters.command("pname", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("pname", COMMAND_HAND_LER) & Filters.me)
 async def name(client, message):
     names = message.command[1]
     print(message)
     name_first = names
     name_last = ""
-    if  "\\n" in names:
+    if "\\n" in names:
         first_name, last_name = names.split("\\n", 1)
     try:
         await client.send(functions.account.UpdateProfile(first_name=name_first, last_name=name_last))
         await message.edit("My name was changed successfully")
-    except Exception as e:  
+    except Exception as e:
         await message.edit(str(e))
 
 
-@Client.on_message(Filters.command("ppic", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("ppic", COMMAND_HAND_LER) & Filters.me)
 async def profile_pic(client, message):
     print(message)
     reply_message = message.reply_to_message.message_id
     await message.edit("Downloading Profile Picture to my local ...")
-    if not os.path.isdir(TMP_DOWNLOAD_DIRECTORY):  
-        os.makedirs(TMP_DOWNLOAD_DIRECTORY)   
+    if not os.path.isdir(TMP_DOWNLOAD_DIRECTORY):
+        os.makedirs(TMP_DOWNLOAD_DIRECTORY)
     photo = None
     try:
         photo = await client.download_media(
             message=message.reply_to_message,
             file_name=TMP_DOWNLOAD_DIRECTORY
         )
-    except Exception as e: 
+    except Exception as e:
         await message.edit(str(e))
     else:
         if photo:
@@ -63,19 +64,20 @@ async def profile_pic(client, message):
             try:
                 await client.send(
                     functions.photos.UploadProfilePhoto(
-                    file=await client.save_file(photo)
+                        file=await client.save_file(photo)
                     )
                 )
-            except Exception as e:  
+            except Exception as e:
                 await message.edit(str(e))
             else:
                 await message.edit("My profile picture was succesfully changed")
     try:
         os.remove(photo)
-    except Exception as e:  
-        logger.warn(str(e))  
+    except Exception as e:
+        logger.warn(str(e))
 
-@Client.on_message(Filters.command("profilephoto", COMMAND_HAND_LER)  & Filters.me)
+
+@Client.on_message(Filters.command("profilephoto", COMMAND_HAND_LER) & Filters.me)
 async def _(client, message):
     """getting user profile photo last changed time"""
     p_number = message.command[1]
@@ -83,8 +85,9 @@ async def _(client, message):
     try:
         a = await message.edit("getting profile pic changed or added date")
         photos = await client.get_profile_photos(message.chat.id)
-        msg = datetime.fromtimestamp(photos[int(p_number)].date).strftime('%d-%m-%Y')
+        msg = datetime.fromtimestamp(
+            photos[int(p_number)].date).strftime('%d-%m-%Y')
         msg = "Last profile photo changed: \n👉 `{}` UTC+3".format(str(msg))
         await a.edit(msg)
-    except :
+    except:
         pass

@@ -17,6 +17,7 @@ admin = 'administrator'
 creator = 'creator'
 ranks = [admin, creator]
 
+
 async def ReplyCheck(message):
     if not message.reply_to_message:
         await message.edit(f"`{message.command[0]}` needs to be a reply.")
@@ -28,6 +29,7 @@ async def ReplyCheck(message):
         await message.delete()
     else:
         return True
+
 
 async def AdminCheck(message):
     SELF = await pyrogram.Client.get_chat_member(
@@ -45,11 +47,12 @@ async def AdminCheck(message):
         else:
             await message.edit("__No permissions to restrict Members__")
 
+
 async def RestrictFailed(message):
     await message.edit(f"I can't {message.command[0]} this user.")
 
 
-@Client.on_message(Filters.command("setgic", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("setgic", COMMAND_HAND_LER) & Filters.me)
 async def set_gic(client: Client, message):
     peer = await client.resolve_peer(message.chat.id)
     if (
@@ -59,7 +62,7 @@ async def set_gic(client: Client, message):
     ):
         reply_message = message.reply_to_message.message_id
     await message.edit("Downloading Profile Picture to my local ...")
-    if not os.path.isdir(TMP_DOWNLOAD_DIRECTORY):  
+    if not os.path.isdir(TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TMP_DOWNLOAD_DIRECTORY)
     photo = None
     try:
@@ -67,7 +70,7 @@ async def set_gic(client: Client, message):
             message=message.reply_to_message,
             file_name=TMP_DOWNLOAD_DIRECTORY
         )
-    except Exception as e: 
+    except Exception as e:
         await message.edit(str(e))
     else:
         if photo:
@@ -80,20 +83,19 @@ async def set_gic(client: Client, message):
                         photo=photo
                     )
                 )
-            except Exception as e:  
+            except Exception as e:
                 await message.edit(str(e))
             else:
                 await message.edit("Group profile picture was succesfully changed")
     try:
         os.remove(photo)
-    except Exception as e:  
-        logger.warnning(str(e)) 
+    except Exception as e:
+        logger.warnning(str(e))
 
 
-
-@Client.on_message(Filters.command("ban", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("ban", COMMAND_HAND_LER) & Filters.me)
 async def bann(client: Client, message):
-    SELF = await client.get_chat_member(chat_id=message.chat.id,user_id=message.from_user.id)
+    SELF = await client.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     if SELF.status in ranks and await ReplyCheck(message) is True:
         name = message.reply_to_message.from_user.first_name
         user_id = message.reply_to_message.from_user.id
@@ -103,7 +105,7 @@ async def bann(client: Client, message):
                 user_id=message.reply_to_message.from_user.id,
                 until_date=0
             )
-            await message.edit("[{}](tg://user?id={}) banned!".format(name,user_id))
+            await message.edit("[{}](tg://user?id={}) banned!".format(name, user_id))
             await client.delete_messages(
                 chat_id=message.chat.id,
                 message_ids=message.reply_to_message.message_id
@@ -112,10 +114,10 @@ async def bann(client: Client, message):
             RestrictFailed(message)
 
 
-@Client.on_message(Filters.command("unban", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("unban", COMMAND_HAND_LER) & Filters.me)
 async def unbann(client: Client, message):
     print(message)
-    SELF = await client.get_chat_member(chat_id=message.chat.id,user_id=message.from_user.id)
+    SELF = await client.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     if SELF.status in ranks and await ReplyCheck(message) is True:
         name = message.reply_to_message.from_user.first_name
         user_id = message.reply_to_message.from_user.id
@@ -124,15 +126,14 @@ async def unbann(client: Client, message):
                 chat_id=message.chat.id,
                 user_id=message.reply_to_message.from_user.id
             )
-            await message.edit("[{}](tg://user?id={}) unbanned!".format(name,user_id))
+            await message.edit("[{}](tg://user?id={}) unbanned!".format(name, user_id))
         except UserAdminInvalid:
             RestrictFailed(message)
 
 
-
-@Client.on_message(Filters.command("promote", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("promote", COMMAND_HAND_LER) & Filters.me)
 async def promot(client: Client, message):
-    SELF = await client.get_chat_member(chat_id=message.chat.id,user_id=message.from_user.id)
+    SELF = await client.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     if await ReplyCheck(message) is True and SELF.status in ranks:
         try:
             x = await client.promote_chat_member(
@@ -149,9 +150,10 @@ async def promot(client: Client, message):
         except PermissionError:
             await RestrictFailed(message)
 
-@Client.on_message(Filters.command("demote", COMMAND_HAND_LER)  & Filters.me)
+
+@Client.on_message(Filters.command("demote", COMMAND_HAND_LER) & Filters.me)
 async def demot(client: Client, message):
-    SELF = await client.get_chat_member(chat_id=message.chat.id,user_id=message.from_user.id)
+    SELF = await client.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     if await ReplyCheck(message) is True and SELF.status in ranks:
         try:
             x = await client.promote_chat_member(
@@ -168,13 +170,15 @@ async def demot(client: Client, message):
         except PermissionError:
             await RestrictFailed(message)
 
-@Client.on_message(Filters.command('botlist', COMMAND_HAND_LER) & Filters.me )
+
+@Client.on_message(Filters.command('botlist', COMMAND_HAND_LER) & Filters.me)
 async def bot_list(client: Client, message):
     try:
         bots = "\n"
-        async for member in client.iter_chat_members(message.chat.id,filter="bots"):
-            bots += "🤖 [{}](tg://user?id={})\n".format(member.user.first_name,member.user.id)
-        await message.edit("Botlist in {}\n{}".format(message.chat.title,bots))
+        async for member in client.iter_chat_members(message.chat.id, filter="bots"):
+            bots += "🤖 [{}](tg://user?id={})\n".format(
+                member.user.first_name, member.user.id)
+        await message.edit("Botlist in {}\n{}".format(message.chat.title, bots))
     except MessageTooLong:
         await message.edit(
             "This group is filled with bots as hell. Uploading bots list as file."
@@ -191,13 +195,13 @@ async def bot_list(client: Client, message):
         os.remove("botlist.txt")
 
 
-@Client.on_message(Filters.command('adminlist', COMMAND_HAND_LER) & Filters.me )
+@Client.on_message(Filters.command('adminlist', COMMAND_HAND_LER) & Filters.me)
 async def admin_list(client: Client, message):
     try:
         admins = "\n"
-        async for _ in client.iter_chat_members(message.chat.id,filter="administrators"):
-            admins += "⭐️ [{}](tg://user?id={})\n".format(name,admin_id)
-        await message.edit("Admin in **{}**\n{}".format(message.chat.title,admins))
+        async for _ in client.iter_chat_members(message.chat.id, filter="administrators"):
+            admins += "⭐️ [{}](tg://user?id={})\n".format(name, admin_id)
+        await message.edit("Admin in **{}**\n{}".format(message.chat.title, admins))
     except MessageTooLong:
         await message.edit(
             "This group is filled with bots as hell. Uploading bots list as file."
@@ -214,13 +218,14 @@ async def admin_list(client: Client, message):
         os.remove("adminlist.txt")
 
 
-@Client.on_message(Filters.command('userlist', COMMAND_HAND_LER) & Filters.me )
+@Client.on_message(Filters.command('userlist', COMMAND_HAND_LER) & Filters.me)
 async def user_list(client: Client, message):
     try:
         users = "\n"
         async for member in client.iter_chat_members(message.chat.id):
-            users += "👉 [{}](tg://user?id={})\n".format(member.user.first_name,member.user.id)
-        await message.edit("Users in **{}**\n{}".format(message.chat.title,users))
+            users += "👉 [{}](tg://user?id={})\n".format(
+                member.user.first_name, member.user.id)
+        await message.edit("Users in **{}**\n{}".format(message.chat.title, users))
     except MessageTooLong:
         await message.edit(
             "This group is filled with bots as hell. Uploading bots list as file."
@@ -237,7 +242,7 @@ async def user_list(client: Client, message):
         os.remove("userslist.txt")
 
 
-@Client.on_message(Filters.command('ghostlist', COMMAND_HAND_LER) & Filters.me  )
+@Client.on_message(Filters.command('ghostlist', COMMAND_HAND_LER) & Filters.me)
 async def ghost_list(client: Client, message):
     try:
         deleted = [
@@ -249,7 +254,7 @@ async def ghost_list(client: Client, message):
         ]
 
         print(len(deleted))
-        await message.edit("{} Deleted Accounts Detected in {}".format(len(deleted),message.chat.title))
+        await message.edit("{} Deleted Accounts Detected in {}".format(len(deleted), message.chat.title))
     except MessageTooLong:
         await message.edit(
             "This group is filled with deleted account as hell. Uploading bots list as file."
@@ -264,13 +269,12 @@ async def ghost_list(client: Client, message):
             reply_to_message_id=message.message_id,
         )
         os.remove("deleted_account.txt")
-        
 
 
-@Client.on_message(Filters.command("mute", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("mute", COMMAND_HAND_LER) & Filters.me)
 async def mutee(client: Client, message):
     print(message)
-    SELF = await client.get_chat_member(chat_id=message.chat.id,user_id=message.from_user.id)
+    SELF = await client.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     if SELF.status in ranks and await ReplyCheck(message) is True:
         try:
             await client.restrict_chat_member(
@@ -287,11 +291,10 @@ async def mutee(client: Client, message):
         except UserAdminInvalid:
             RestrictFailed(message)
 
-            
 
-@Client.on_message(Filters.command("kick", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("kick", COMMAND_HAND_LER) & Filters.me)
 async def kick(client: Client, message):
-    SELF = await client.get_chat_member(chat_id=message.chat.id,user_id=message.from_user.id)
+    SELF = await client.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     if SELF.status in ranks and await ReplyCheck(message) is True:
         try:
             await client.restrict_chat_member(
@@ -317,7 +320,7 @@ async def kick(client: Client, message):
 
 @Client.on_message(Filters.command("cclean", COMMAND_HAND_LER) & Filters.me)
 async def clean_deleted(client: Client, message):
-    SELF = await client.get_chat_member(chat_id=message.chat.id,user_id=message.from_user.id)
+    SELF = await client.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     if SELF.status in ranks:
         await message.edit("`Cleaning deleted accounts in this chat..`")
         all_members = await client.iter_chat_members(message.chat.id)
@@ -343,13 +346,9 @@ async def clean_deleted(client: Client, message):
         await message.edit(f"Removed {len(removed)} deleted accounts.")
 
 
-
-
-
-
 @Client.on_message(Filters.command("pin", COMMAND_HAND_LER) & Filters.me)
 async def pin(client: Client, message):
-    SELF = await client.get_chat_member(chat_id=message.chat.id,user_id=message.from_user.id)
+    SELF = await client.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     if SELF.status in ranks and message.reply_to_message.message_id:
         try:
             await client.pin_chat_message(
@@ -361,10 +360,10 @@ async def pin(client: Client, message):
         except RPCError:
             pass
 
+
 @Client.on_message(Filters.command("undlt", COMMAND_HAND_LER) & Filters.me)
 async def undlt(client: Client, message):
     deleted_msg = "Deleted 10 Messages in {}\n".format(message.chat.title)
-    async for msg in client.iter_history(chat_id=message.chat.id,limit=10,reverse=False):
+    async for msg in client.iter_history(chat_id=message.chat.id, limit=10, reverse=False):
         deleted_msg += "👉 {}\n".format(msg.text)
     await message.edit(deleted_msg)
-

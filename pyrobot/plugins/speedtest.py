@@ -15,7 +15,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-
 @Client.on_message(Filters.command(["speedtest"], COMMAND_HAND_LER) & Filters.me)
 async def count_(client: Client, message):
     if message.forward_from:

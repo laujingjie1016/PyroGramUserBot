@@ -12,8 +12,9 @@ from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
-                    
-@Client.on_message(Filters.command("barcode", COMMAND_HAND_LER)  & Filters.me)
+
+
+@Client.on_message(Filters.command("barcode", COMMAND_HAND_LER) & Filters.me)
 async def barcode_(client: Client, message):
     print(message)
     await message.edit("Creating barcode")
@@ -43,7 +44,8 @@ async def barcode_(client: Client, message):
         message = "SYNTAX: `.barcode <long text to include>`"
     bar_code_type = "code128"
     try:
-        bar_code_mode_f = barcode.get(bar_code_type, message, writer=ImageWriter())
+        bar_code_mode_f = barcode.get(
+            bar_code_type, message, writer=ImageWriter())
         filename = bar_code_mode_f.save(bar_code_type)
         await client.send_document(
             chat_id=message.chat.id,

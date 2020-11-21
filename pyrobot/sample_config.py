@@ -1,8 +1,6 @@
 import os
 
 
-
-
 class Config:
     LOGGER = True
     # The Telegram API things

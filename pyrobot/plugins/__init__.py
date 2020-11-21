@@ -7,6 +7,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
+
 def __list_all_modules():
     import glob
     from os.path import basename, dirname, isfile
