@@ -1,3 +1,13 @@
+tasks:
+  - init: pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
+image:
+  file: .gitpod.Dockerfile
 vscode:
   extensions:
+    - azemoh.theme-onedark@0.5.2:/5oGEBOrfF8FpkAkZHcNjw==
+    - ms-vscode.cpptools@0.26.2:Pq/tmf2WN3SanVzB4xZc1g==
+    - magicstack.MagicPython@1.1.0:j4FYz9tfFt//ke3wUcL3VQ==
+    - azemoh.one-monokai@0.4.6:QbQ86IyMLnyitBScBr6EYg==
+    - ms-python.python@2020.3.71659:dHnDfBB7DRzC2i/XCSLe5A==
     - zhuangtongfa.material-theme@3.2.5:qBcZ8shcLHGBtVpM7AUgmQ==
+    - kiteco.kite@0.134.0:L+gzRWmbSboEyF0nz1k+zQ==

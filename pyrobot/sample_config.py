@@ -3,14 +3,14 @@ import os
 class Config(object):
     LOGGER = True
     # The Telegram API things
-    APP_ID = int(os.environ.get("APP_ID", 1221076))
-    API_HASH = os.environ.get("API_HASH", "73afbf8d848474280384a7d0d2784bc6")
+    APP_ID = int(os.environ.get("APP_ID", 1714929))
+    API_HASH = os.environ.get("API_HASH", "e2036011bf3d8187a1d2a4b03fa63975")
     # Get these values from my.telegram.org
     # string session for running on Heroku
     # some people upload their session files on GitHub or other third party hosting
     # websites, this might prevent the un-authorized use of the
     # confidential session files
-    a = """AQCk1mgg1HgmS8xPEjBTxo0TNdC9RHNY3z9lVZzr8lpsw3DjPnrUZnwRPkUWAnoE6xq-KxnI03E8YD3oUVt5c7azc6UE2g-btwB00xKGUzugyR7LRDI1XtayVZ3p9Kxo6c-o8A56vcRllgb7IB8pnAXPYRNjb0KKJC4H5nKEOFTBtjiGKaToe8F9raKx4zRJ7chGPfylOTcwobTd2CKPY6Iow88HrzwgubAtb5I109mcUVRErTOeaM6AJYZR2cHhRLAYuvUELdBHMwKrh34IbQYcgWgf-M1Dq14yr9ada1hFE90oYNORohA7hX_5LdXVnTfSPaLf6U7lymRV6OnVFQUyQjqfJwA"""
+    a = """AQCM6PQ5UmXC6cwl6UDi5bRopEoFfuPsyqQkrCTPlHMYkEwxqRAnF8CnXwQiLmlepoMd6-RPVb8qnEmLHhRsNgFcIUIN3MIPSXStIb72ZcUFifrOfgBHqsHtqUN7piAZLyAL-z1Rd4f1vCzgy-BBQ0Wu7L1Ohygu2WRvGy3FSfm13JgjkX-ol7PyKOcUNCDoc0jr_4krZXLeOx53vnv72DFrP3Bryi-ugZWilBy3LMIt-iWPxu61a80no9In--5wa9OgkB-FyGrVOFqF6xf8Fpw1ntYmUePMbJmMU5Qfkr_0sbSVKhJUWcqey-BmlestrBhMHtEsW0oYjceaS_Lq4D62SXI2zAA"""
     HU_STRING_SESSION = os.environ.get("HU_STRING_SESSION", a)
     # maximum message length in Telegram
     MAX_MESSAGE_LENGTH = 4096

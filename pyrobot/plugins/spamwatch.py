@@ -65,8 +65,8 @@ async def user_list(client: Client, message):
                         "\n\n**GBanned User $SPOTTED**\n" \
                         "**#SPAMWATCH_API BAN**" \
                         f"\n**User:** [{firstname}](tg://user?id={user_id})\n" \
-                        f"**ID:** `{user_id}`\n**Reason:** `{intruder.reason}`\n" \
-                        "**Quick Action:** Banned in {message.chat.title}\n\n$AUTOBAN #id{user_id}"
+                        f"**ID:** `{user_id}`\n" \
+                        f"**Quick Action:** Banned in {message.chat.title}\n\n$AUTOBAN #id{user_id}"
                     await client.send_message(
                         chat_id=LOGGER_GROUP,
                         text=txt  
