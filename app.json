@@ -1,6 +1,6 @@
 {
   "name": "PyroGramUserBot",
-  "description": "PyroGram UserBot. Powered by @UserBotTalk",
+  "description": "PyroGram UserBot.",
   "keywords": [
     "telegram",
     "best",
@@ -60,7 +60,7 @@
   "addons": [{
     "plan": "heroku-postgresql",
     "options": {
-      "version": "9.5"
+      "version": "13"
     }
   }],
   "buildpacks": [{
