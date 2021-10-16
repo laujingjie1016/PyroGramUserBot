@@ -3,12 +3,12 @@ import logging
 import os
 
 import pyrogram
-import spamwatch
+from pyrobot import LOGGER_GROUP, SPAMWATCH_API
 from pyrogram import Client, Filters
 from pyrogram.api import functions, types
 from pyrogram.errors import *
 
-from pyrobot import LOGGER_GROUP, SPAMWATCH_API
+import spamwatch
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -55,20 +55,20 @@ async def user_list(client: Client, message):
         return
     if SPAMWATCH_API is not None:
         try:
-
-            WATCH = spamwatch.Client(SPAMWATCH_API)
-            intruder = WATCH.get_ban(user_id)
-            if intruder and await AdminCheck(message):
-                await client.kick_chat_member(chat_id, user_id)
-                txt = r"\\**#Antispam_Log**//" \
-                    "\n\n**GBanned User $SPOTTED**\n" \
-                    "**#SPAMWATCH_API BAN**" \
-                    f"\n**User:** [{firstname}](tg://user?id={user_id})\n" \
-                    f"**ID:** `{user_id}`\n**Reason:** `{intruder.reason}`\n" \
-                    "**Quick Action:** Banned in {message.chat.title}\n\n$AUTOBAN #id{user_id}"
-                await client.send_message(
-                    chat_id=LOGGER_GROUP,
-                    text=txt
-                )
+            if SPAMWATCH_API is not None:
+                WATCH = spamwatch.Client(SPAMWATCH_API)
+                intruder = WATCH.get_ban(user_id)
+                if intruder and await AdminCheck(message):
+                    await client.kick_chat_member(chat_id, user_id)
+                    txt = r"\\**#Antispam_Log**//" \
+                        "\n\n**GBanned User $SPOTTED**\n" \
+                        "**#SPAMWATCH_API BAN**" \
+                        f"\n**User:** [{firstname}](tg://user?id={user_id})\n" \
+                        f"**ID:** `{user_id}`\n" \
+                        f"**Quick Action:** Banned in {message.chat.title}\n\n$AUTOBAN #id{user_id}"
+                    await client.send_message(
+                        chat_id=LOGGER_GROUP,
+                        text=txt
+                    )
         except Exception:
             pass

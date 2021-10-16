@@ -1,6 +1,6 @@
 pyrogram
-tgcrypto
-
+Pillow
+aria2p
 asyncio
 aiohttp
 
@@ -11,12 +11,7 @@ emoji
 # Heroku /update R
 gitpython
 heroku3
-
-# Image manipulation Tools
-hachoir
-Pillow
-
-# SQL DataBase ReQuirements
+oauth2client
 psycopg2-binary
 sqlalchemy
 
