@@ -1,3 +1,4 @@
+pyrogram
 Pillow
 aria2p
 asyncio
@@ -11,7 +12,6 @@ google-auth-httplib2
 google-auth-oauthlib
 hachoir
 heroku3
-git+https://github.com/pyrogram/pyrogram/archive/master.zip
 oauth2client
 psycopg2-binary
 pySmartDL
